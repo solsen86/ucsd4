@@ -18,12 +18,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="./img/logo.ico" type="image/ico">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-
-        <!-- Custom Styles for this page-->
-        <link href="./css/main.css" rel="stylesheet">
+        <!-- Bootstrap & CSS -->
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        
     </head>
     <body>
         
@@ -74,7 +74,7 @@
                 <div class="col-lg-2 h-100 bg-secondary p-0">
                     <div class="btn-group-vertical btn-group-justified">
                         <a class="btn btn-secondary btn-lg btn-block active"  href="./dashboard.php" role="group">
-                            <i class="bi bi-speedometer"></i>
+                            <i class="fas fa-tachometer-alt"></i>
                             Dashboard
                         </a>
                         <div class="btn-group-vertical btn-group-justified" role="group">
@@ -93,49 +93,50 @@
                 </div>
                 <div class="col-lg-10 bg-light h-100" id="window">
                     <div class="container-fluid">
-                        <?php // Include config file
-                            require_once "./config.php";
+                        <table id="asset_table" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID #</th>
+                                    <th>Name</th>
+                                    <th>Serial #</th>
+                                    <th>SPED</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php // Include config file
+                                require_once "./config.php";
 
-                            $sql = "SELECT * FROM assets ORDER BY asset_tag";
-                            if($result = mysqli_query($link, $sql)){
-                                if(mysqli_num_rows($result) > 0) {
-                                    echo '<table class="table table-hover">';
-                                        echo '<thead>';
-                                            echo '<tr>';
-                                                echo '<th>ID #</th>';
-                                                echo '<th>Name</th>';
-                                                echo '<th>Serial #</th>';
-                                                echo '<th>SPED</th>';
-                                                echo '<th>Action</th>';
-                                            echo '</tr>';
-                                        echo '</thead>';
-                                        echo '<tbody>';
-                                        while($row = mysqli_fetch_array($result)){
-                                            echo '<tr>';
-                                                echo '<td>' . $row['asset_tag'] . '</td>';
-                                                echo '<td>' . $row['asset_name'] . '</td>';
-                                                echo '<td>' . $row['asset_serial'] . '</td>';
-                                                echo '<td>' . $row['asset_sped_tag'] . '</td>';
-                                                echo '<td>';
-                                                    echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="Edit" data-toggle="tooltip"><span class="bi bi-pencil-fill bi-sm bi-fw mr-2 text-gray-400"></span></a>';
-                                                    echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="bi bi-trash-fill bi-sm bi-fw mr-2 text-gray-400"></span></a>';
-                                                echo '</td>';
-                                            echo '</tr>';
-                                        }
-                                        echo '</tbody>';
-                                    echo '</table>';
-                                    // Free result
-                                    mysqli_free_result($result);
-                                    } else {
-                                    echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                                $sql = "SELECT * FROM assets ORDER BY asset_tag";
+                                if($result = mysqli_query($link, $sql)){
+                                    if(mysqli_num_rows($result) > 0) {
+                                        
+                                            while($row = mysqli_fetch_array($result)){
+                                                echo '<tr>';
+                                                    echo '<td>' . $row['asset_tag'] . '</td>';
+                                                    echo '<td>' . $row['asset_name'] . '</td>';
+                                                    echo '<td>' . $row['asset_serial'] . '</td>';
+                                                    echo '<td>' . $row['asset_sped_tag'] . '</td>';
+                                                    echo '<td>';
+                                                        echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="Edit" data-toggle="tooltip"><span class="fas fa-edit mr-2"></span></a>';
+                                                        echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>';
+                                                    echo '</td>';
+                                                echo '</tr>';
+                                            }
+                                        // Free result
+                                        mysqli_free_result($result);
+                                        } else {
+                                        echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                                    }
+                                } else {
+                                    echo 'Oops! Something went wrong. Please try again later.';
                                 }
-                            } else {
-                                echo 'Oops! Something went wrong. Please try again later.';
-                            }
 
-                            // close connection
-                            mysqli_close($link)
-                        ?>
+                                // close connection
+                                mysqli_close($link)
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -143,8 +144,10 @@
       
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="./js/assets.js"></script>
     </body>
 </html>
