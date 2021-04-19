@@ -96,6 +96,7 @@
                         <table id="asset_table" class="display" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th>Loc.</th>
                                     <th>ID #</th>
                                     <th>Name</th>
                                     <th>Serial #</th>
@@ -107,19 +108,24 @@
                                 <?php // Include config file
                                 require_once "./config.php";
 
-                                $sql = "SELECT * FROM assets ORDER BY asset_tag";
+                                $sql = "SELECT buildings.building_name, assets.asset_tag, assets.asset_name, assets.asset_serial, assets.asset_sped_tag FROM assets
+                                            LEFT JOIN logistics ON logistics.asset_tag = assets.asset_tag
+                                            LEFT JOIN rooms ON rooms.id = logistics.room_id
+                                            LEFT JOIN buildings ON buildings.id = rooms.building_id
+                                        ORDER BY asset_tag";
                                 if($result = mysqli_query($link, $sql)){
                                     if(mysqli_num_rows($result) > 0) {
                                         
                                             while($row = mysqli_fetch_array($result)){
                                                 echo '<tr>';
+                                                    echo '<td>' . $row['building_name'] . '</td>';
                                                     echo '<td>' . $row['asset_tag'] . '</td>';
                                                     echo '<td>' . $row['asset_name'] . '</td>';
                                                     echo '<td>' . $row['asset_serial'] . '</td>';
                                                     echo '<td>' . $row['asset_sped_tag'] . '</td>';
                                                     echo '<td>';
-                                                        echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="Edit" data-toggle="tooltip"><span class="fas fa-edit mr-2"></span></a>';
-                                                        echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>';
+                                                        echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a>';
+                                                        echo '<a href="delete.php?id' . $row['asset_tag'] . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>';
                                                     echo '</td>';
                                                 echo '</tr>';
                                             }

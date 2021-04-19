@@ -95,12 +95,6 @@
                         <a class="btn btn-secondary btn-lg btn-block" href="./reports.php" role="group">
                             Reports
                         </a>
-                        <a class="btn btn-secondary btn-lg btn-block" href="#" role="group">
-                            Link
-                        </a>
-                        <a class="btn btn-secondary btn-lg btn-block" href="#" role="group">
-                            Link
-                        </a>
                     </div>
                 </div>
                 <div class="col-lg-10 bg-light h-100">

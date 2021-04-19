@@ -44,11 +44,9 @@ CREATE TABLE processors (
     cpu_number VARCHAR(10) NOT NULL,
     cpu_low FLOAT(3, 2) NULL DEFAULT NULL, 
     cpu_high FLOAT(3, 2) NULL DEFAULT NULL,
-    cpu_brand_id INT NOT NULL,
     cpu_model_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (asset_id) REFERENCES assets(id),
-    FOREIGN KEY (cpu_brand_id) REFERENCES cpu_brands(id),
     FOREIGN KEY (cpu_model_id) REFERENCES cpu_models(id)
 );
 
