@@ -23,15 +23,15 @@ require_once "./config.php";
         <link rel="icon" href="./img/logo.ico" type="image/ico">
 
         <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
         <!-- Custom Styles for this page-->
         <link href="./css/main.css" rel="stylesheet">
     </head>
     <body>
         
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
             <a class="navbar-brand" href="dashboard.php">
                 <img src="./img/logo.ico">    
                 UCSD#4 IT
@@ -44,13 +44,13 @@ require_once "./config.php";
                     <!-- Nav Item - User Information -->
                     <li name="full_name" class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="full_name">
+                            <i class="fas fa-user-circle bi-xl mr-2"></i>
                             <?php echo $_SESSION["full_name"] ?>
-                            <i class="bi bi-person-circle bi-xl ml-2"></i>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
+                            <!-- <a class="dropdown-item" href="#">
                             <i class="bi bi-file-earmark-person bi-sm bi-fw mr-2 text-gray-400"></i>
                             Profile
                             </a>
@@ -61,10 +61,10 @@ require_once "./config.php";
                             <a class="dropdown-item" href="#">
                                 <i class="bi bi-clock-history bi-sm bi-fw mr-2 text-gray-400"></i>
                                 Activity Log
-                            </a>
-                            <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div>
+                            </a> -->
                             <a class="dropdown-item" href="./logout.php">
-                                <i class="bi bi-box-arrow-left"></i>
+                                <i class="fas fa-sign-out-alt mr-4"></i>
                                 Logout
                             </a>
                         </div>
@@ -73,28 +73,41 @@ require_once "./config.php";
             </div>
         </nav>
 
-        <div class="container-fluid" id="window">
+        <!-- Content Area -->
+        <div class="container-fluid flex-grow-1" id="window">
             <div class="row h-100">
-                <div class="col-lg-2 h-100 bg-secondary p-0">
-                    <div class="btn-group-vertical btn-group-justified">
-                        <a class="btn btn-secondary btn-lg btn-block active"  href="./dashboard.php" role="group">
-                            <i class="bi bi-speedometer"></i>
+                
+                <!-- sidebar - colapses on smaller screens -->
+                <div class="col-lg-2 sidebar d-lg-block d-none bg-secondary p-0">
+                    <div class="sidebar-container btn-group-vertical btn-group-justified">
+                        <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
+                            <i class="fas fa-tachometer-alt mr-4"></i>
                             Dashboard
                         </a>
                         <div class="btn-group-vertical btn-group-justified" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle text-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-clipboard-list mr-4"></i>
                                 Inventory
                             </button>
                             <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" href="./assets.php">Assets</a>
-                                <a class="dropdown-item" href="./supplies.php">Supplies</a>
+                                <a class="dropdown-item text-left" href="./assets.php">
+                                    <i class="fas fa-laptop mr-4"></i>
+                                    Assets
+                                </a>
+                                <a class="dropdown-item text-left" href="./supplies.php">
+                                    <i class="fas fa-fill-drip mr-4"></i>
+                                    Supplies
+                                </a>
                             </div>
                         </div>
-                        <a class="btn btn-secondary btn-lg btn-block" href="./reports.php" role="group">
+                        <a class="btn btn-secondary btn-lg btn-block text-left" href="./reports.php" role="group">
+                            <i class="fas fa-chart-bar mr-4"></i>
                             Reports
                         </a>
                     </div>
                 </div>
+        
+                <!-- Content Area -->
                 <div class="col-lg-10 bg-light h-100">
                     <div class="container-fluid">Reports Area</div>
                 </div>

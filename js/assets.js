@@ -1,3 +1,7 @@
 $(document).ready( function () {
-    $('#asset_table').DataTable();
+    $('#asset_table').DataTable( {
+        scrollY: true,
+        scrollX: true,
+        pageResize: true
+    });
 });

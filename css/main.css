@@ -27,3 +27,7 @@ body {
     display: flex;
     align-items: center;
   }
+
+div.dataTables_length {
+    display: none;
+}

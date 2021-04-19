@@ -19,10 +19,10 @@
         <link rel="icon" href="./img/logo.ico" type="image/ico">
 
         <!-- Bootstrap & CSS -->
-        <link rel="stylesheet" href="./css/main.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="./css/main.css">
         
     </head>
     <body>
@@ -40,13 +40,13 @@
                     <!-- Nav Item - User Information -->
                     <li name="full_name" class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="full_name">
+                            <i class="fas fa-user-circle bi-xl mr-2"></i>
                             <?php echo $_SESSION["full_name"] ?>
-                            <i class="bi bi-person-circle bi-xl ml-2"></i>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
+                            <!-- <a class="dropdown-item" href="#">
                             <i class="bi bi-file-earmark-person bi-sm bi-fw mr-2 text-gray-400"></i>
                             Profile
                             </a>
@@ -57,10 +57,10 @@
                             <a class="dropdown-item" href="#">
                                 <i class="bi bi-clock-history bi-sm bi-fw mr-2 text-gray-400"></i>
                                 Activity Log
-                            </a>
+                            </a> -->
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./logout.php">
-                                <i class="bi bi-box-arrow-left"></i>
+                                <i class="fas fa-sign-out-alt mr-4"></i>
                                 Logout
                             </a>
                         </div>
@@ -69,31 +69,43 @@
             </div>
         </nav>
 
-        <div class="container-fluid" id="window">
+        <div class="container-fluid flex-grow-1" id="window">
             <div class="row h-100">
-                <div class="col-lg-2 h-100 bg-secondary p-0">
-                    <div class="btn-group-vertical btn-group-justified">
-                        <a class="btn btn-secondary btn-lg btn-block active"  href="./dashboard.php" role="group">
-                            <i class="fas fa-tachometer-alt"></i>
+                
+                <!-- sidebar - colapses on smaller screens -->
+                <div class="col-lg-2 sidebar d-lg-block d-none bg-secondary p-0">
+                    <div class="sidebar-container btn-group-vertical btn-group-justified">
+                        <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
+                            <i class="fas fa-tachometer-alt mr-4"></i>
                             Dashboard
                         </a>
                         <div class="btn-group-vertical btn-group-justified" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle text-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-clipboard-list mr-4"></i>
                                 Inventory
                             </button>
                             <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" href="assets.php">Assets</a>
-                                <a class="dropdown-item" href="supplies.php">Supplies</a>
+                                <a class="dropdown-item text-left" href="./assets.php">
+                                    <i class="fas fa-laptop mr-4"></i>
+                                    Assets
+                                </a>
+                                <a class="dropdown-item text-left" href="./supplies.php">
+                                    <i class="fas fa-fill-drip mr-4"></i>
+                                    Supplies
+                                </a>
                             </div>
                         </div>
-                        <a class="btn btn-secondary btn-lg btn-block" href="reports.php" role="group">
+                        <a class="btn btn-secondary btn-lg btn-block text-left" href="./reports.php" role="group">
+                            <i class="fas fa-chart-bar mr-4"></i>
                             Reports
                         </a>
                     </div>
                 </div>
+
+                <!-- Content Area -->
                 <div class="col-lg-10 bg-light h-100" id="window">
-                    <div class="container-fluid">
-                        <table id="asset_table" class="display" style="width:100%">
+                    <div class="container-fluid h-100">
+                        <table id="asset_table" class="display pageResize h-100" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Loc.</th>
@@ -101,6 +113,7 @@
                                     <th>Name</th>
                                     <th>Serial #</th>
                                     <th>SPED</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -108,7 +121,7 @@
                                 <?php // Include config file
                                 require_once "./config.php";
 
-                                $sql = "SELECT buildings.building_name, assets.asset_tag, assets.asset_name, assets.asset_serial, assets.asset_sped_tag FROM assets
+                                $sql = "SELECT buildings.building_name, assets.asset_tag, assets.asset_name, assets.asset_serial, assets.asset_sped_tag, logistics.device_status FROM assets
                                             LEFT JOIN logistics ON logistics.asset_tag = assets.asset_tag
                                             LEFT JOIN rooms ON rooms.id = logistics.room_id
                                             LEFT JOIN buildings ON buildings.id = rooms.building_id
@@ -123,6 +136,7 @@
                                                     echo '<td>' . $row['asset_name'] . '</td>';
                                                     echo '<td>' . $row['asset_serial'] . '</td>';
                                                     echo '<td>' . $row['asset_sped_tag'] . '</td>';
+                                                    echo '<td>' . $row['device_status'] . '</td>';
                                                     echo '<td>';
                                                         echo '<a href="update.php?id' . $row['asset_tag'] . '" class="mr-3 title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a>';
                                                         echo '<a href="delete.php?id' . $row['asset_tag'] . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>';
@@ -154,6 +168,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/1.10.24/features/pageResize/dataTables.pageResize.min.js"></script>
         <script type="text/javascript" src="./js/assets.js"></script>
     </body>
 </html>
