@@ -92,7 +92,7 @@
                                 Inventory
                             </button>
                             <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item text-left" href="./assets.php">
+                                <a class="dropdown-item text-left" href="./assets.html">
                                     <i class="fas fa-laptop mr-4"></i>
                                     Assets
                                 </a>
