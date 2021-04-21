@@ -39,11 +39,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto">
                     <!-- Nav Item - User Information -->
                     <li name="full_name" class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="full_name">
-                            <i class="fas fa-user-circle bi-xl mr-2"></i>
+                            <i class="fas fa-user-circle fa-lg mr-2"></i>
                             <?php echo $_SESSION["full_name"] ?>
                         </a>
                         <!-- Dropdown - User Information -->
@@ -60,10 +60,10 @@
                             <a class="dropdown-item" href="#">
                                 <i class="bi bi-clock-history bi-sm bi-fw mr-2 text-gray-400"></i>
                                 Activity Log
+                                <div class="dropdown-divider"></div>
                             </a> -->
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./logout.php">
-                                <i class="fas fa-sign-out-alt mr-4"></i>
+                                <i class="fas fa-sign-out-alt fa-fw mr-4"></i>
                                 Logout
                             </a>
                         </div>
@@ -72,6 +72,7 @@
             </div>
         </nav>
 
+        <!-- Content Area -->
         <div class="container-fluid flex-grow-1" id="window">
             <div class="row h-100">
                 
@@ -79,32 +80,32 @@
                 <div class="col-lg-2 sidebar d-lg-block d-none bg-secondary p-0">
                     <div class="sidebar-container btn-group-vertical btn-group-justified">
                         <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
-                            <i class="fas fa-tachometer-alt mr-4"></i>
+                            <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
                             Dashboard
                         </a>
                         <div class="btn-group-vertical btn-group-justified" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle text-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-clipboard-list mr-4"></i>
+                                <i class="fas fa-clipboard-list fa-fw mr-4"></i>
                                 Inventory
                             </button>
                             <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item text-left" href="./assets.php">
-                                    <i class="fas fa-laptop mr-4"></i>
+                                <a class="dropdown-item text-left" href="./assets.html">
+                                    <i class="fas fa-laptop fa-fw mr-4"></i>
                                     Assets
                                 </a>
                                 <a class="dropdown-item text-left" href="./supplies.php">
-                                    <i class="fas fa-fill-drip mr-4"></i>
+                                    <i class="fas fa-fill-drip fa-fw mr-4"></i>
                                     Supplies
                                 </a>
                             </div>
                         </div>
                         <a class="btn btn-secondary btn-lg btn-block text-left" href="./reports.php" role="group">
-                            <i class="fas fa-chart-bar mr-4"></i>
+                            <i class="fas fa-chart-bar fa-fw mr-4"></i>
                             Reports
                         </a>
                     </div>
                 </div>
-
+        
                 <!-- Content Area -->
                 <div class="col-lg-10 bg-light h-100" id="window">
                     <div class="container-fluid h-100">

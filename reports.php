@@ -1,15 +1,17 @@
 <?php
-//DO NOT REMOVE
-session_start();
+    // Initialize the session
+    session_start();
+ 
+    // Check if the user is logged in, if not then redirect him to login page
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: login.php");
+        exit;
+    }
 
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
+    // Include config file
+    require_once "./config.php";
 
-// Include config file
-require_once "./config.php";
+    //pull overall data to feed dashboard widgets
 
 ?>
 
@@ -23,15 +25,15 @@ require_once "./config.php";
         <link rel="icon" href="./img/logo.ico" type="image/ico">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+        
         <!-- Custom Styles for this page-->
         <link href="./css/main.css" rel="stylesheet">
     </head>
     <body>
         
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
             <a class="navbar-brand" href="dashboard.php">
                 <img src="./img/logo.ico">    
                 UCSD#4 IT
@@ -44,7 +46,7 @@ require_once "./config.php";
                     <!-- Nav Item - User Information -->
                     <li name="full_name" class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="full_name">
-                            <i class="fas fa-user-circle bi-xl mr-2"></i>
+                            <i class="fas fa-user-circle fa-lg mr-2"></i>
                             <?php echo $_SESSION["full_name"] ?>
                         </a>
                         <!-- Dropdown - User Information -->
@@ -64,7 +66,7 @@ require_once "./config.php";
                                 <div class="dropdown-divider"></div>
                             </a> -->
                             <a class="dropdown-item" href="./logout.php">
-                                <i class="fas fa-sign-out-alt mr-4"></i>
+                                <i class="fas fa-sign-out-alt fa-fw mr-4"></i>
                                 Logout
                             </a>
                         </div>
@@ -81,35 +83,35 @@ require_once "./config.php";
                 <div class="col-lg-2 sidebar d-lg-block d-none bg-secondary p-0">
                     <div class="sidebar-container btn-group-vertical btn-group-justified">
                         <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
-                            <i class="fas fa-tachometer-alt mr-4"></i>
+                            <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
                             Dashboard
                         </a>
                         <div class="btn-group-vertical btn-group-justified" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle text-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-clipboard-list mr-4"></i>
+                                <i class="fas fa-clipboard-list fa-fw mr-4"></i>
                                 Inventory
                             </button>
                             <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
                                 <a class="dropdown-item text-left" href="./assets.php">
-                                    <i class="fas fa-laptop mr-4"></i>
+                                    <i class="fas fa-laptop fa-fw mr-4"></i>
                                     Assets
                                 </a>
                                 <a class="dropdown-item text-left" href="./supplies.php">
-                                    <i class="fas fa-fill-drip mr-4"></i>
+                                    <i class="fas fa-fill-drip fa-fw mr-4"></i>
                                     Supplies
                                 </a>
                             </div>
                         </div>
                         <a class="btn btn-secondary btn-lg btn-block text-left" href="./reports.php" role="group">
-                            <i class="fas fa-chart-bar mr-4"></i>
+                            <i class="fas fa-chart-bar fa-fw mr-4"></i>
                             Reports
                         </a>
                     </div>
                 </div>
         
                 <!-- Content Area -->
-                <div class="col-lg-10 bg-light h-100">
-                    <div class="container-fluid">Reports Area</div>
+                <div class="col-lg-10 bg-light">
+                    <div class="container-fluid h-100">Content Area</div>
                 </div>
             </div>
         </div>
