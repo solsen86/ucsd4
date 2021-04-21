@@ -31,7 +31,6 @@ CREATE TABLE assets (
     asset_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE INDEX uq_asset_tag (asset_tag ASC),
-    UNIQUE INDEX uq_asset_name (asset_name ASC)
 );
 
 -- CPU BRANDS
@@ -91,7 +90,7 @@ CREATE TABLE memory (
 -- IP Addresses TABLE: FOREIGN KEY ( asset_tag ) REFERENCES assets(id)
 CREATE TABLE network_addresses (
     id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,,
+    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
     network_address INT UNSIGNED NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
@@ -121,7 +120,7 @@ CREATE TABLE buildings (
 CREATE TABLE rooms (
     id INT NOT NULL AUTO_INCREMENT,
     building_id INT NOT NULL,
-    room_name VARCHAR(25) NOT NULL,
+    room_name VARCHAR(50) NOT NULL,
     room_number VARCHAR(10) NULL DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (building_id) REFERENCES buildings(id)
@@ -130,10 +129,9 @@ CREATE TABLE rooms (
 -- Table for logistical information containing building, room and user assignment
 CREATE TABLE logistics (
     id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,,
+    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
     room_id INT NOT NULL,
-    staff_member VARCHAR(50) NULL DEFAULT NULL,
-    device_status ENUM('ACTIVE','RETIRED', 'NEEDS REPAIRED', 'PARTS ONLY', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
+    device_status ENUM('ACTIVE','RETIRED', 'NEEDS REPAIR', 'PARTS ONLY', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
     purchase_date DATETIME NULL DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag),
@@ -159,7 +157,7 @@ CREATE TABLE device_types (
 -- Table Table for device categories and sub categories
 CREATE TABLE classifications (
     id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,,
+    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
     device_type_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag),
@@ -186,9 +184,22 @@ CREATE TABLE  models (
 CREATE TABLE mfr_info (
     id INT NOT NULL AUTO_INCREMENT,
     model_id INT NOT NULL,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,,
+    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
     mfr_date DATETIME NULL DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (model_id) REFERENCES models(id),
     FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
 );
+
+-- Notes
+CREATE TABLE notes (
+    id INT NOT NULL AUTO_INCREMENT,
+    asset_tag SMALLINT(6) ZEROFILL NOT NULL,
+    note_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    note_author VARCHAR(50) NULL DEFAULT NULL,
+    note_subject VARCHAR(50) NOT NULL,
+    note_type ENUM('General', 'Damage Report', 'Repair Summary') NOT NULL,
+    note_text TINYTEXT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
+);  
