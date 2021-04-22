@@ -6,12 +6,11 @@
 -- Users Table
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(25) NOT NULL,
-    last_name VARCHAR(25) NOT NULL,
-    username VARCHAR(25) NOT NULL UNIQUE,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE KEY uq_full_name (first_name, last_name)
+    PRIMARY KEY (id)
 );
 
 /*
@@ -19,177 +18,224 @@ CREATE TABLE users (
     inventory for the UCSD4 IT Department.
 */
 
--- Assets table // Parent table
+-- MANUFACTURER
+CREATE TABLE mfr (
+    mfr_id INT NOT NULL AUTO_INCREMENT,
+    mfr_name VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY (mfr_id)
+);
+
+INSERT INTO mfr (mfr_name) VALUES
+    ('Acer'),
+    ('Apple'),
+    ('AVer USA'),
+    ('ByteSpeed'),
+    ('Canon'),
+    ('Dell'),
+    ('Hitachi'),
+    ('HP'),
+    ('Lenovo'),;
+
+-- MODEL
+CREATE TABLE models (
+    model_id INT NOT NULL AUTO_INCREMENT,
+    mfr_id INT NOT NULL,
+    model_name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (model_id),
+    FOREIGN KEY (mfr_id) REFERENCES mfr.mfr_id
+);
+
+INSERT INTO models (mfr_id, model_name) VALUES
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Acer' , 'C910'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Pro A1278'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Pro 13.3" A1502'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'iMac 21.5" A1418',),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'OptiPlex 7010'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'ByteSpeed' , 'H81M-C'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude E6520'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude E5590'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Air 13" A1466'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Lenovo' , 'Thinkpad E480'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Pro 13" A1708'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude 7490'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude 7400'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Mac Mini A1993'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Air 13" A2179');
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'HP' , 'LaserJet P4015X'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude 5500'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'AVer USA' , 'AverVision F17-8M'),
+    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Chromebook 3100');
+
+-- BUILDING 
+CREATE TABLE buildings (
+    building_id INT NOT NULL AUTO_INCREMENT,
+    building_code CHAR(2) NOT NULL,
+    PRIMARY KEY (building_id)
+);
+INSERT INTO buildings (building_code) VALUES
+    ('HS'),
+    ('K8'),
+    ('DO'),
+    ('BB');
+
+-- ROOM
+CREATE TABLE rooms (
+    room_id INT NOT NULL AUTO_INCREMENT,
+    building_id INT NOT NULL,
+    room_number VARCHAR(10) NOT NULL UNIQUE,
+    room_name VARCHAR(50) NULL DEFAULT NULL,
+    PRIMARY KEY (room_id),
+    FOREIGN KEY (building_id) REFERENCES buildings.building_id
+);
+
+INSERT INTO rooms (building_id, room_number, room_name) VALUES
+    (1, '22', 'Cafeteria'),
+    (1, '23', 'Rec Lab'),
+    (1, '103', 'Main Office'),
+    (1, '111', 'Mailroom'),
+    (1, '115', 'Athletics Office'),
+    (1, '116', 'Student Information Office'),
+    (1, '125', 'Computer & Technology Education'),
+    (1, '126', 'Counseling'),
+    (1, '127', 'SPED - Life Skills'),
+    (1, '128', 'Math - Johnson'),
+    (1, '129', 'Food & Consumer Science'),
+    (1, '130', 'Business Lab'),
+    (1, '130A', 'IT Server Room'),
+    (1, '140', 'IT Office'),
+    (1, '141', 'Guitar'),
+    (1, '142', 'Band & Choir'),
+    (1, '149', 'Library/Media Lab'),
+    (1, '150', 'Writing Lab'),
+    (1, '155', 'SPED - Resource Room'),
+    (1, '156', 'Science Lab'),
+    (1, '157', 'Physical Science'),
+    (1, '158', 'English - Christopher'),
+    (1, '159', 'English - Deckert'),
+    (1, '160', 'English - Tinker'),
+    (1, '161', 'Math - Petersen'),
+    (1, '162', 'Social Studies'),
+    (1, '163', 'Indistrial Arts'),
+    (1, '166E', 'Vocational Agriculture'),
+    (1, '167A', 'Custodian Closet'),
+    (1, '175', 'SPED Conference Room'),
+    (1, '179', 'Life Science'),
+    (1, '180', 'Spanish'),
+    (1, '189', 'Social Studies - Johnson'),
+    (1, '189A', 'Maintenance Office');
+
+-- STATUS
+CREATE TABLE dev_status (
+    status_id INT NOT NULL AUTO_INCREMENT,
+    status_name VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY (status_id)
+);
+
+INSERT INTO dev_status (status_name) VALUES
+    ('In Service'),
+    ('Out of Service'),
+    ('Recycle List');
+
+-- Device Type
+CREATE TABLE dev_types (
+    dev_type_id INT NOT NULL AUTO_INCREMENT,
+    dev_type VARCHAR(50) NOT NULL,
+    PRIMARY KEY (dev_type_id)
+);
+
+INSERT INTO dev_types (dev_type) VALUES
+    (UPPER('Desktop')),
+    (UPPER('laptop')),
+    (UPPER('server')),
+    (UPPER('mobile device')),
+    (UPPER('printer')),
+    (UPPER('scanner')),
+    (UPPER('doc cam')),
+    (UPPER('projector')),
+    (UPPER('interactive board')),
+    (UPPER('router')),
+    (UPPER('switch')),
+    (UPPER('wireless ap')),
+    (UPPER('nas')),
+    (UPPER('device cart'));
+
+-- SYSTEMS
+CREATE TABLE systems (
+    os_id INT NOT NULL AUTO_INCREMENT,
+    os_name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (os_id)
+);
+
+INSERT INTO systems (os_name) VALUES 
+    (UPPER('Windows')),
+    (UPPER('MacOS')),
+    (UPPER('Linux')),
+    (UPPER('ChromeOS')),
+    (UPPER('iOS')),
+    (UPPER('Android'));
+
+-- ASSETS
 CREATE TABLE assets (
-    id INT NOT NULL AUTO_INCREMENT,
     asset_tag SMALLINT(6) ZEROFILL NOT NULL,
     asset_name VARCHAR(15) NULL DEFAULT NULL,
-    asset_description TINYTEXT NULL DEFAULT NULL,
     asset_serial VARCHAR(50) NOT NULL,
+    model_id INT NULL DEFAULT NULL,
+    room_id INT NULL DEFAULT NULL,
+    status_id INT NULL DEFAULT NULL,
+    dev_type_id INT NULL DEFAULT NULL,
+    os_id INT NULL DEFAULT NULL,
+    asset_cpu VARCHAR(50) NULL DEFAULT NULL,
+    asset_hdd INT NULL DEFAULT NULL,
+    asset_mem INT NULL DEFAULT NULL,
+    asset_static_ip VARCHAR(15) NULL DEFAULT NULL,
+    asset_wlan_mac VARCHAR(12) NULL DEFAULT NULL,
+    asset_lan_mac VARCHAR(12) NULL DEFAULT NULL,
     asset_sped_tag ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
-    asset_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    asset_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    UNIQUE INDEX uq_asset_tag (asset_tag ASC),
+    asset_bios_password VARCHAR(50) NULL DEFAULT NULL,
+    asset_date DATETIME NULL DEFAULT NULL,
+    asset_age INT NULL DEFAULT NULL,
+    asset_price DECIMAL(15,2) NULL DEFAUTL NULL,
+    PRIMARY KEY (asset_tag),
+    FOREIGN KEY (model_id) REFERENCES models.model_id,
+    FOREIGN KEY (room_id) REFERENCES rooms.room_id,d
+    FOREIGN KEY (status_id) REFERENCES dev_status.status_id,
+    FOREIGN KEY (dev_type_id) REFERENCES dev_types.dev_type_id,
+    FOREIGN KEY (os_id) REFERENCES systems.os_id
 );
 
--- CPU BRANDS
-CREATE TABLE cpu_brands (
-    id INT NOT NULL AUTO_INCREMENT,
-    cpu_brand VARCHAR(25) NOT NULL,
-    PRIMARY KEY (id)
-);
+INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id, 
+                    status_id, dev_type_id, os_id, asset_cpu, asset_hdd, 
+                    asset_mem, asset_wlan_mac,
+                    asset_sped_tag, asset_date) VALUES 
+    (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13" A1502',
+        SELECT room_id FROM rooms WHERE room_number = '140', SELECT dev_type_id from dev_types WHERE dev_type = 'Laptop',
+        1, 'i7-8650U', 512, 16, UPPER('186590cdb871'), 'NO', STR_TO_DATE('03/13/2017','%m/%d/%Y'));
 
--- CPU MODELS
-CREATE TABLE cpu_models (
-    id INT NOT NULL AUTO_INCREMENT,
-    cpu_brand_id INT NOT NULL,
-    cpu_model_name VARCHAR(25) NOT NULL,
-    cpu_model_num VARCHAR(25) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (cpu_brand_id) REFERENCES cpu_brands(id)
-);
-
--- CPU TABLE: FOREIGN KEY ( asset_tag ) REFERENCES assets(id)
-CREATE TABLE processors (
-    id INT NOT NULL AUTO_INCREMENT,
+-- assignments
+CREATE TABLE assignments (
+    assignment_id INT NOT NULL AUTO_INCREMENT,
     asset_tag SMALLINT(6) ZEROFILL NOT NULL,
-    cpu_brand VARCHAR(25) NOT NULL,
-    cpu_model VARCHAR(25) NOT NULL,
-    cpu_number VARCHAR(10) NOT NULL,
-    cpu_low FLOAT(3, 2) NULL DEFAULT NULL, 
-    cpu_high FLOAT(3, 2) NULL DEFAULT NULL,
-    cpu_model_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(tag),
-    FOREIGN KEY (cpu_model_id) REFERENCES cpu_models(id)
+    assignment_status ENUM('CHECKED IN', 'CHECKED OUT') NOT NULL DEFAULT 'CHECKED IN',
+    PRIMARY KEY (assignment_id),
+    FOREIGN KEY (asset_tag) REFERENCES assets.asset_tag
 );
 
--- STORAGE TABLE: FOREIGN KEY ( asset_tag ) REFERENCES assets(id)
-CREATE TABLE storage (
-    id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL,
-    storage_type ENUM('SSD', 'SSHD', 'HHD', 'eMMC') NOT NULL,
-    storage_form ENUM('M.2 SATA', '2.5\" SATA', '3.5\" SATA', 'Embedded') NOT NULL,
-    storage_size SMALLINT(4) NOT NULL,
-    storage_unit ENUM('GB', 'TB'),
-    PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
-);
+INSERT INTO assignments (asset_tag, assignment_status) VALUES
+    (10270, 'CHECKED OUT');
 
--- MEMORY TABLE: FOREIGN KEY ( asset_tag ) REFERENCES assets(id)
-CREATE TABLE memory (
-    id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL,
-    memory_type ENUM('DESKTOP', 'LAPTOP', 'SERVER', 'OPTANE') NOT NULL,
-    memory_size SMALLINT(4) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
-);
+-- CREATE TABLE CHECKOUTS
+CREATE TABLE checkouts (
+    checkout_id INT NOT NULL AUTO_INCREMENT,
+    assignment_id INT NOT NULL,
+    checkout_user VARCHAR(50) NOT NULL,
+    checkout_date_out TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    checkout_date_in TIMESTAMP NULL DEFAULT NULL,
+    PRIMARY KEY (checkout_id),
+    FOREIGN KEY (assignment_id)
+)
 
--- IP Addresses TABLE: FOREIGN KEY ( asset_tag ) REFERENCES assets(id)
-CREATE TABLE network_addresses (
-    id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
-    network_address INT UNSIGNED NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
-);
-
--- MAC Addresses TABLE: FOREIGN KEY ( asset_tag ) REFERENCES assets(id)
-CREATE TABLE physical_addresses (
-    id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL,
-    physical_address CHAR(12) NOT NULL UNIQUE,
-    physical_type ENUM('WLAN', 'LAN') NULL DEFAULT NULL,
-    physical_label VARCHAR(25) NULL DEFAULT NULL,
-    physical_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    physical_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)        
-);      
-
--- Table for Buildings
-CREATE TABLE buildings (
-    id INT NOT NULL AUTO_INCREMENT,
-    building_name VARCHAR(25),
-    PRIMARY KEY (id)
-);
-
--- Table for Rooms
-CREATE TABLE rooms (
-    id INT NOT NULL AUTO_INCREMENT,
-    building_id INT NOT NULL,
-    room_name VARCHAR(50) NOT NULL,
-    room_number VARCHAR(10) NULL DEFAULT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (building_id) REFERENCES buildings(id)
-);
-
--- Table for logistical information containing building, room and user assignment
-CREATE TABLE logistics (
-    id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
-    room_id INT NOT NULL,
-    device_status ENUM('ACTIVE','RETIRED', 'NEEDS REPAIR', 'PARTS ONLY', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
-    purchase_date DATETIME NULL DEFAULT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag),
-    FOREIGN KEY (room_id) REFERENCES rooms(id)
-);
-
--- Table for device type
-CREATE TABLE device_categories (
-    id INT NOT NULL AUTO_INCREMENT,
-    device_category VARCHAR(25),
-    PRIMARY KEY (id)
-);
-
--- Table for device category
-CREATE TABLE device_types (
-    id INT NOT NULL AUTO_INCREMENT,
-    device_category_id INT NOT NULL,
-    device_type VARCHAR(25),
-    PRIMARY KEY (id),
-    FOREIGN KEY (device_category_id) REFERENCES device_categories(id)
-);
-
--- Table Table for device categories and sub categories
-CREATE TABLE classifications (
-    id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
-    device_type_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag),
-    FOREIGN KEY (device_type_id) REFERENCES device_types(id)
-);
-
--- Table for brand names
-CREATE TABLE brands (
-    id INT NOT NULL AUTO_INCREMENT,
-    brand_name VARCHAR(25) NOT NULL,
-    PRIMARY KEY (id)
-);
-
--- Table table for models
-CREATE TABLE  models (
-    id INT NOT NULL AUTO_INCREMENT,
-    model_name VARCHAR(25) NOT NULL,
-    brand_id INT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (brand_id) REFERENCES brands(id)
-);
-
--- Manufacture info
-CREATE TABLE mfr_info (
-    id INT NOT NULL AUTO_INCREMENT,
-    model_id INT NOT NULL,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
-    mfr_date DATETIME NULL DEFAULT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (model_id) REFERENCES models(id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
-);
+INSERT INTO checkouts (assignment_id, checkout_user) VALUES
+    (1, 'Seth Olsen');
 
 -- Notes
 CREATE TABLE notes (
@@ -198,8 +244,7 @@ CREATE TABLE notes (
     note_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     note_author VARCHAR(50) NULL DEFAULT NULL,
     note_subject VARCHAR(50) NOT NULL,
-    note_type ENUM('General', 'Damage Report', 'Repair Summary') NOT NULL,
-    note_text TINYTEXT NOT NULL,
+    note_text TEXT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
 );  
