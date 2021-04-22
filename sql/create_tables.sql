@@ -19,13 +19,13 @@ CREATE TABLE users (
 */
 
 -- MANUFACTURER
-CREATE TABLE mfr (
-    mfr_id INT NOT NULL AUTO_INCREMENT,
-    mfr_name VARCHAR(50) NOT NULL UNIQUE,
-    PRIMARY KEY (mfr_id)
+CREATE TABLE brands (
+    brand_id INT NOT NULL AUTO_INCREMENT,
+    brand_name VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY (brand_id)
 );
 
-INSERT INTO mfr (mfr_name) VALUES
+INSERT INTO brands (brand_name) VALUES
     ('Acer'),
     ('Apple'),
     ('AVer USA'),
@@ -34,37 +34,37 @@ INSERT INTO mfr (mfr_name) VALUES
     ('Dell'),
     ('Hitachi'),
     ('HP'),
-    ('Lenovo'),;
+    ('Lenovo');
 
 -- MODEL
 CREATE TABLE models (
     model_id INT NOT NULL AUTO_INCREMENT,
-    mfr_id INT NOT NULL,
+    brand_id INT NOT NULL,
     model_name VARCHAR(50) NOT NULL,
     PRIMARY KEY (model_id),
-    FOREIGN KEY (mfr_id) REFERENCES mfr.mfr_id
+    FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
 );
 
-INSERT INTO models (mfr_id, model_name) VALUES
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Acer' , 'C910'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Pro A1278'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Pro 13.3" A1502'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'iMac 21.5" A1418',),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'OptiPlex 7010'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'ByteSpeed' , 'H81M-C'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude E6520'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude E5590'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Air 13" A1466'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Lenovo' , 'Thinkpad E480'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Pro 13" A1708'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude 7490'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude 7400'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Mac Mini A1993'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Apple' , 'Macbook Air 13" A2179');
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'HP' , 'LaserJet P4015X'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Latitude 5500'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'AVer USA' , 'AverVision F17-8M'),
-    (SELECT mfr_id FROM mfr WHERE mfr_name = 'Dell' , 'Chromebook 3100');
+INSERT INTO models (brand_id, model_name) VALUES
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Acer'), 'C910'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Pro A1278'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Pro 13.3" A1502'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'iMac 21.5" A1418'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'OptiPlex 7010'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'ByteSpeed'), 'H81M-C'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'Latitude E6520'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'Latitude E5590'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Air 13" A1466'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Lenovo'), 'Thinkpad E480'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Pro 13" A1708'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'Latitude 7490'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'Latitude 7400'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Mac Mini A1993'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Air 13" A2179'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'HP'), 'LaserJet P4015X'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'Latitude 5500'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'AVer USA'), 'AverVision F17-8M'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'Chromebook 3100');
 
 -- BUILDING 
 CREATE TABLE buildings (
@@ -85,7 +85,7 @@ CREATE TABLE rooms (
     room_number VARCHAR(10) NOT NULL UNIQUE,
     room_name VARCHAR(50) NULL DEFAULT NULL,
     PRIMARY KEY (room_id),
-    FOREIGN KEY (building_id) REFERENCES buildings.building_id
+    FOREIGN KEY (building_id) REFERENCES buildings(building_id)
 );
 
 INSERT INTO rooms (building_id, room_number, room_name) VALUES
@@ -194,22 +194,23 @@ CREATE TABLE assets (
     asset_bios_password VARCHAR(50) NULL DEFAULT NULL,
     asset_date DATETIME NULL DEFAULT NULL,
     asset_age INT NULL DEFAULT NULL,
-    asset_price DECIMAL(15,2) NULL DEFAUTL NULL,
+    asset_price DECIMAL(15,2) NULL DEFAULT NULL,
     PRIMARY KEY (asset_tag),
-    FOREIGN KEY (model_id) REFERENCES models.model_id,
-    FOREIGN KEY (room_id) REFERENCES rooms.room_id,d
-    FOREIGN KEY (status_id) REFERENCES dev_status.status_id,
-    FOREIGN KEY (dev_type_id) REFERENCES dev_types.dev_type_id,
-    FOREIGN KEY (os_id) REFERENCES systems.os_id
+    FOREIGN KEY (model_id) REFERENCES models(model_id),
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id),
+    FOREIGN KEY (status_id) REFERENCES dev_status(status_id),
+    FOREIGN KEY (dev_type_id) REFERENCES dev_types(dev_type_id),
+    FOREIGN KEY (os_id) REFERENCES systems(os_id)
 );
 
 INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id, 
                     status_id, dev_type_id, os_id, asset_cpu, asset_hdd, 
                     asset_mem, asset_wlan_mac,
-                    asset_sped_tag, asset_date) VALUES 
-    (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13" A1502',
-        SELECT room_id FROM rooms WHERE room_number = '140', SELECT dev_type_id from dev_types WHERE dev_type = 'Laptop',
-        1, 'i7-8650U', 512, 16, UPPER('186590cdb871'), 'NO', STR_TO_DATE('03/13/2017','%m/%d/%Y'));
+                    asset_sped_tag, asset_date, asset_age) VALUES 
+    (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), (SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13" A1502'),
+        (SELECT room_id FROM rooms WHERE room_number = '140'), 1, (SELECT dev_type_id from dev_types WHERE dev_type = 'Laptop'),
+        1, 'i7-8650U', 512, 16, UPPER('186590cdb871'), 'NO', (STR_TO_DATE('03/13/2017','%m/%d/%Y')),
+        (DATEDIFF(CURDATE(),(STR_TO_DATE('03/13/2017','%m/%d/%Y')))));
 
 -- assignments
 CREATE TABLE assignments (
@@ -217,22 +218,22 @@ CREATE TABLE assignments (
     asset_tag SMALLINT(6) ZEROFILL NOT NULL,
     assignment_status ENUM('CHECKED IN', 'CHECKED OUT') NOT NULL DEFAULT 'CHECKED IN',
     PRIMARY KEY (assignment_id),
-    FOREIGN KEY (asset_tag) REFERENCES assets.asset_tag
+    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
 );
 
 INSERT INTO assignments (asset_tag, assignment_status) VALUES
-    (10270, 'CHECKED OUT');
+    (8538, 'CHECKED OUT');
 
 -- CREATE TABLE CHECKOUTS
 CREATE TABLE checkouts (
     checkout_id INT NOT NULL AUTO_INCREMENT,
     assignment_id INT NOT NULL,
     checkout_user VARCHAR(50) NOT NULL,
-    checkout_date_out TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    checkout_date_out TIMESTAMP NOT NULL DEFAULT CURDATE(),
     checkout_date_in TIMESTAMP NULL DEFAULT NULL,
     PRIMARY KEY (checkout_id),
-    FOREIGN KEY (assignment_id)
-)
+    FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id)
+);
 
 INSERT INTO checkouts (assignment_id, checkout_user) VALUES
     (1, 'Seth Olsen');
@@ -241,7 +242,7 @@ INSERT INTO checkouts (assignment_id, checkout_user) VALUES
 CREATE TABLE notes (
     id INT NOT NULL AUTO_INCREMENT,
     asset_tag SMALLINT(6) ZEROFILL NOT NULL,
-    note_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    note_date TIMESTAMP NOT NULL DEFAULT CURDATE(),
     note_author VARCHAR(50) NULL DEFAULT NULL,
     note_subject VARCHAR(50) NOT NULL,
     note_text TEXT NOT NULL,
