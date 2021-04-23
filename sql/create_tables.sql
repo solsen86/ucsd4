@@ -210,7 +210,7 @@ INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id,
     (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), (SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13" A1502'),
         (SELECT room_id FROM rooms WHERE room_number = '140'), 1, (SELECT dev_type_id from dev_types WHERE dev_type = 'Laptop'),
         1, 'i7-8650U', 512, 16, UPPER('186590cdb871'), 'NO', (STR_TO_DATE('03/13/2017','%m/%d/%Y')),
-        (DATEDIFF(CURDATE(),(STR_TO_DATE('03/13/2017','%m/%d/%Y')))));
+        (TIMESTAMPDIFF(YEAR,(STR_TO_DATE('03/13/2017','%m/%d/%Y')),CURDATE())));
 
 -- assignments
 CREATE TABLE assignments (
