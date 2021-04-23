@@ -25,12 +25,14 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+        <!-- <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.5.3/css/colReorder.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"></link> -->
         <link rel="stylesheet" href="./css/main.css">
         
     </head>
     <body>
         
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
             <a class="navbar-brand" href="dashboard.php">
                 <img src="./img/logo.ico">    
                 UCSD#4 IT
@@ -77,7 +79,7 @@
             <div class="row h-100">
                 
                 <!-- sidebar - colapses on smaller screens -->
-                <div class="col-lg-2 sidebar d-lg-block d-none bg-secondary p-0">
+                <div class="col-lg-1 sidebar d-lg-block d-none bg-secondary p-0">
                     <div class="sidebar-container btn-group-vertical btn-group-justified">
                         <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
                             <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
@@ -89,7 +91,7 @@
                                 Inventory
                             </button>
                             <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item text-left" href="./assets.html">
+                                <a class="dropdown-item text-left" href="./assets.php">
                                     <i class="fas fa-laptop fa-fw mr-4"></i>
                                     Assets
                                 </a>
@@ -107,16 +109,22 @@
                 </div>
         
                 <!-- Content Area -->
-                <div class="col-lg-10 bg-light h-100" id="window">
+                <div class="col-lg-11 bg-light h-100" id="window">
                     <div class="container-fluid h-100">
                         <table id="asset_table" class="display pageResize h-100" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Loc.</th>
+                                    <th>Building</th>
+                                    <th>Room</th>
+                                    <th>Location</th>
                                     <th>ID #</th>
                                     <th>Name</th>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>Device Type</th>
                                     <th>Serial #</th>
                                     <th>SPED</th>
+                                    <th>Age</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -137,6 +145,9 @@
         <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
         <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+        <!-- <script src="https://cdn.datatables.net/colreorder/1.5.3/js/dataTables.colReorder.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script> -->
         <script type="text/javascript" src="./js/assets.js"></script>
     </body>
 </html>

@@ -5,13 +5,30 @@ $(window).on('load', function () {
             contentType: 'application/json'
         },
         columns: [
-            {data: 'loc'},
-            {data: 'id'},
-            {data: 'name'},
-            {data: 'serial'},
-            {data: 'sped'},
-            {data: 'status'},
-            {data: 'actions'},
+            {data: 'building'}, // 0
+            {data: 'room'},     // 1
+            {data: 'location'}, // 2
+            {data: 'id'},       // 3
+            {data: 'name'},     // 4
+            {data: 'brand'},    // 5
+            {data: 'model'},    // 6
+            {data: 'type'},     // 7
+            {data: 'serial'},   // 8
+            //{data: 'os'},
+            //{data: 'cpu'},
+            //{data: 'hdd_type'},
+            //{data: 'hdd_size'},
+            //{data: 'mem'},
+            //{data: 'wlan'},
+            //{data: 'lan'},
+            //{data: 'ip'},
+            //{data: 'bios'},
+            {data: 'sped'},     // 9
+            //{data: 'date'},
+            {data: 'age'},      // 10
+            //{data: 'price'},
+            {data: 'status'},   // 11
+            {data: 'actions'}   // 12
         ],
         language: {
             searchPanes: {
@@ -25,7 +42,11 @@ $(window).on('load', function () {
                 config: {
                     cascadePanes: true
                 }
-            }
+            },
+            // {
+            //     extend: 'colvis',
+            //     collectionLayout: 'fixed four-column'
+            // }
         ],
         columnDefs: [
             { 
@@ -38,16 +59,19 @@ $(window).on('load', function () {
                 searchPanes:{
                     show: true
                 },
-                targets: [4]
+                targets: [1],
             },
             { 
                 searchPanes:{
                     show: true
                 },
-                targets: [5]
+                targets: [2]
             }
         ],
         dom: 'Bfrtip',
+        //scrollX: true,
+        responsive: true,
+        //colReorder: true,
         pageResize: true,
         stateSave: true
     });
