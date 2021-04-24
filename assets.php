@@ -32,6 +32,32 @@
     </head>
     <body>
         
+        <!-- Bulk Upload Modal -->
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Upload from Excel/CSV
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="needs-validation" novalidate>
+                            <div class="custom-file">
+                                <input type="file" accept=".xlsx,.csv" class="custom-file-input" id="validatedCustomFile" required>
+                                <label class="custom-file-label" for="validatedCustomFile">Choose File...</label>
+                                <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>            
+            </div>
+        </div>
+
+        <!-- Top Navbar  -->
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
             <a class="navbar-brand" href="dashboard.php">
                 <img src="./img/logo.ico">    
@@ -40,8 +66,44 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav ml-auto">
+            
+                <ul class="navbar-nav d-lg-none">
+                    <!-- Navebar items to show when sidebar is collapsed -->
+                    <li class="nav-item">
+                        <a class="nav-link text-left"  href="./dashboard.php" role="group">
+                            <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle text-left" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-clipboard-list fa-fw mr-4"></i>
+                            Inventory
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="./assets.php">
+                                <i class="fas fa-laptop fa-fw mr-4"></i>
+                                Assets
+                            </a>
+                            <a class="dropdown-item" href="./supplies.php">
+                                <i class="fas fa-fill-drip fa-fw mr-4"></i>
+                                Supplies
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-left" href="./reports.php">
+                            <i class="fas fa-chart-bar fa-fw mr-4"></i>
+                            Reports
+                        </a>
+                    </li>
+                </ul>
+            
+                <!-- User profile dropdown -->
+                <ul class="navbar-nav ml-auto">
+
                     <!-- Nav Item - User Information -->
                     <li name="full_name" class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="full_name">
@@ -79,7 +141,7 @@
             <div class="row h-100">
                 
                 <!-- sidebar - colapses on smaller screens -->
-                <div class="col-lg-1 sidebar d-lg-block d-none bg-secondary p-0">
+                <div class="sidebar d-lg-block d-none bg-secondary p-0">
                     <div class="sidebar-container btn-group-vertical btn-group-justified">
                         <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
                             <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
@@ -109,7 +171,7 @@
                 </div>
         
                 <!-- Content Area -->
-                <div class="col-lg-11 bg-light h-100" id="window">
+                <div class="bg-light h-100" id="window">
                     <div class="container-fluid h-100">
                         <table id="asset_table" class="display pageResize h-100" style="width:100%">
                             <thead>
