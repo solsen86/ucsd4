@@ -46,8 +46,6 @@ if($result = mysqli_query($link, $sql)){
             $asset_price = $row['asset_price'];
             $status_name = $row['status_name'];
 
-            // convert date
-
             $return_arr[] = array(
                 "building" => $building_code,
                 "room" => $room_number,

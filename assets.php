@@ -69,29 +69,19 @@
             
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
             
-                <ul class="navbar-nav d-lg-none">
+                <ul class="navbar-nav">
                     <!-- Navebar items to show when sidebar is collapsed -->
                     <li class="nav-item">
-                        <a class="nav-link text-left"  href="./dashboard.php" role="group">
-                            <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
-                            Dashboard
+                        <a class="nav-link active" href="./assets.php">
+                            <i class="fas fa-laptop fa-fw mr-4"></i>
+                            Assets
                         </a>
                     </li>
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle text-left" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-clipboard-list fa-fw mr-4"></i>
-                            Inventory
+                    <li class="nav-item">
+                        <a class="nav-link" href="./supplies.php">
+                            <i class="fas fa-fill-drip fa-fw mr-4"></i>
+                            Supplies
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="./assets.php">
-                                <i class="fas fa-laptop fa-fw mr-4"></i>
-                                Assets
-                            </a>
-                            <a class="dropdown-item" href="./supplies.php">
-                                <i class="fas fa-fill-drip fa-fw mr-4"></i>
-                                Supplies
-                            </a>
-                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-left" href="./reports.php">
@@ -137,65 +127,72 @@
         </nav>
 
         <!-- Content Area -->
-        <div class="container-fluid flex-grow-1" id="window">
-            <div class="row h-100">
-                
-                <!-- sidebar - colapses on smaller screens -->
-                <div class="sidebar d-lg-block d-none bg-secondary p-0">
-                    <div class="sidebar-container btn-group-vertical btn-group-justified">
-                        <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
-                            <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
-                            Dashboard
-                        </a>
-                        <div class="btn-group-vertical btn-group-justified" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle text-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-clipboard-list fa-fw mr-4"></i>
-                                Inventory
-                            </button>
-                            <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item text-left" href="./assets.php">
-                                    <i class="fas fa-laptop fa-fw mr-4"></i>
-                                    Assets
-                                </a>
-                                <a class="dropdown-item text-left" href="./supplies.php">
-                                    <i class="fas fa-fill-drip fa-fw mr-4"></i>
-                                    Supplies
-                                </a>
-                            </div>
-                        </div>
-                        <a class="btn btn-secondary btn-lg btn-block text-left" href="./reports.php" role="group">
-                            <i class="fas fa-chart-bar fa-fw mr-4"></i>
-                            Reports
-                        </a>
-                    </div>
-                </div>
-        
-                <!-- Content Area -->
-                <div class="bg-light h-100" id="window">
-                    <div class="container-fluid h-100">
-                        <table id="asset_table" class="display pageResize h-100" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Building</th>
-                                    <th>Room</th>
-                                    <th>Location</th>
-                                    <th>ID #</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                    <th>Device Type</th>
-                                    <th>Serial #</th>
-                                    <th>SPED</th>
-                                    <th>Age</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+        <div class="container-fluid flex-grow-1 bg-light h-100" id="window">
+            
+            <!-- DB Record options -->
+            <div class="row m-2">
+                <div class="btn-group">
+                    <button class="btn btn-secondary">Add Record</button>
+                    <button class="btn btn-secondary">Upload from Excel/CSV</button>
                 </div>
             </div>
-        </div>
+
+            <!-- Data Table -->
+            <div class="row"> 
+                <div class="container-fluid h-100">
+                    <table id="asset_table" class="display pageResize h-100" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Building</th>
+                                <th>Room</th>
+                                <th>Location</th>
+                                <th>ID #</th>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Device Type</th>
+                                <th>Serial #</th>
+                                <th>SPED</th>
+                                <th>Age</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            
+
+            <!-- sidebar - colapses on smaller screens -->
+            <!-- <div class="sidebar d-lg-block d-none bg-secondary p-0">
+                <div class="sidebar-container btn-group-vertical btn-group-justified">
+                    <a class="btn btn-secondary btn-lg btn-block active text-left"  href="./dashboard.php" role="group">
+                        <i class="fas fa-tachometer-alt fa-fw mr-4"></i>
+                        Dashboard
+                    </a>
+                    <div class="btn-group-vertical btn-group-justified" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-lg dropdown-toggle text-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-clipboard-list fa-fw mr-4"></i>
+                            Inventory
+                        </button>
+                        <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item text-left" href="./assets.php">
+                                <i class="fas fa-laptop fa-fw mr-4"></i>
+                                Assets
+                            </a>
+                            <a class="dropdown-item text-left" href="./supplies.php">
+                                <i class="fas fa-fill-drip fa-fw mr-4"></i>
+                                Supplies
+                            </a>
+                        </div>
+                    </div>
+                    <a class="btn btn-secondary btn-lg btn-block text-left" href="./reports.php" role="group">
+                        <i class="fas fa-chart-bar fa-fw mr-4"></i>
+                        Reports
+                    </a>
+                </div>
+            </div>
+        </div> -->
       
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

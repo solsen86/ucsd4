@@ -187,7 +187,7 @@ CREATE TABLE assets (
     os_id INT NULL DEFAULT NULL,
     asset_cpu VARCHAR(50) NULL DEFAULT NULL,
     asset_hdd_type ENUM('SSD', 'SSHD', 'HDD', 'eMMC') NULL DEFAULT NULL,
-    asset_hdd INT NULL DEFAULT NULL,
+    asset_hdd_size INT NULL DEFAULT NULL,
     asset_mem INT NULL DEFAULT NULL,
     asset_static_ip VARCHAR(15) NULL DEFAULT NULL,
     asset_wlan_mac VARCHAR(12) NULL DEFAULT NULL,
@@ -210,8 +210,8 @@ INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id,
                     asset_mem, asset_wlan_mac,
                     asset_sped_tag, asset_date, asset_age) VALUES 
     (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), (SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13" A1502'),
-        (SELECT room_id FROM rooms WHERE room_number = '140'), (SELECT status_name FROM dev_status WHERE), (SELECT dev_type_id from dev_types WHERE dev_type = 'Laptop'),
-        1, 'i7-8650U', 512, 16, UPPER('186590cdb871'), 'NO', (STR_TO_DATE('03/13/2017','%m/%d/%Y')),
+        (SELECT room_id FROM rooms WHERE room_number = '140'), (SELECT status_id FROM dev_status WHERE status_name = 'In Service'), (SELECT dev_type_id from dev_types WHERE dev_type = 'Laptop'),
+        (SELECT os_id FROM systems WHERE os_name = 'Windows'), 'i7-8650U', 512, 16, UPPER('186590cdb871'), 'NO', (STR_TO_DATE('03/13/2017','%m/%d/%Y')),
         (TIMESTAMPDIFF(YEAR,(STR_TO_DATE('03/13/2017','%m/%d/%Y')),CURDATE())));
 
 -- assignments
