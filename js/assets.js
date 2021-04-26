@@ -78,3 +78,15 @@ $(window).on('load', function () {
 
 
 });
+
+$('#deleteRecord').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var deviceId = button.data('id');
+    var link = "location.href='delete.php?id='" + deviceId;
+    console.log(link);
+
+    var modal = $(this);
+    modal.find('.modal-title').text('Deleting Record for Device ' + deviceId);
+    modal.find('.modal-body p').text('Are you sure you want to delete the record for the asset with District ID #' + deviceId + '?');
+    modal.find('.modal-footer btn btn-danger').attr("onclick", link);
+});

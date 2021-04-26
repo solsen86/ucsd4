@@ -46,6 +46,8 @@ if($result = mysqli_query($link, $sql)){
             $asset_price = $row['asset_price'];
             $status_name = $row['status_name'];
 
+            // convert date
+
             $return_arr[] = array(
                 "building" => $building_code,
                 "room" => $room_number,
@@ -66,11 +68,11 @@ if($result = mysqli_query($link, $sql)){
                 "ip" => $asset_static_ip,
                 "bios" => $asset_bios_password,
                 "sped" => $asset_sped_tag,
-                "date" => date_format($asset_date, 'm/d/Y'),
+                "date" => $asset_date,
                 "age" => $asset_age,
                 "price" => $asset_price,
                 "status" => $status_name,
-                "actions" => '<a href="details.php?id=' . $asset_tag . '" class="mr-3 title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a> <a href="delete.php?id=' . $asset_tag . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>'
+                "actions" => '<a href="details.php?id=' . $asset_tag . '" class="mr-3 title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a> <a data-target="#deleteRecord" data-toggle="modal" data-id="' . $asset_tag . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>'
             );
         }
         // Free result

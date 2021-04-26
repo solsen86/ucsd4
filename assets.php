@@ -108,7 +108,7 @@
                 
                 <!-- DB Record options -->
                 <div class="container-fluid my-2 ml-0">
-                        <button class="btn btn-secondary mr-2"><i class="fas fa-plus mr-2"></i>Add Record</button>
+                        <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
                         <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from Excel/CSV</button>
                 </div> 
 
@@ -136,35 +136,78 @@
             </div>
         </div>
 
-            <!-- Bulk Upload Modal -->
-            <div class="modal fade" tabindex="-1" id="fileUpload" role="dialog">
-                <div class="modal-dialog" role="document" >
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">
-                                Upload from Excel/CSV
-                            </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="needs-validation" novalidate>
-                                <div class="custom-file">
-                                    <input type="file" accept=".xlsx,.csv" class="custom-file-input" id="validatedCustomFile" required>
-                                    <label class="custom-file-label" for="validatedCustomFile">Choose File...</label>
-                                    <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>            
-                </div>
+        <!-- Bulk Upload Modal -->
+        <div class="modal fade" tabindex="-1" id="fileUpload" role="dialog">
+            <div class="modal-dialog" role="document" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Upload from Excel/CSV
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="needs-validation" novalidate>
+                            <div class="custom-file">
+                                <input type="file" accept=".xlsx,.csv" class="custom-file-input" id="validatedCustomFile" required>
+                                <label class="custom-file-label" for="validatedCustomFile">Choose File...</label>
+                                <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>            
             </div>
-            
+        </div>
+        
+        <!-- New Record Modal -->
+        <div class="modal fade" tabindex="-1" id="addNew" role="dialog">
+            <div class="modal-dialog" role="document" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Add New Record
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>            
+            </div>
+        </div>
 
+        <!-- Delete Record Modal -->
+        <div class="modal fade" tabindex="-1" id="deleteRecord" role="dialog">
+            <div class="modal-dialog" role="document" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Deleting Record for Device
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this record?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
+                        <button class="btn btn-danger" data-dismiss="modal" onclick=""><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                    </div>
+                </div>            
+            </div>
+        </div>
             <!-- sidebar - colapses on smaller screens -->
             <!-- <div class="sidebar d-lg-block d-none bg-secondary p-0">
                 <div class="sidebar-container btn-group-vertical btn-group-justified">
