@@ -203,7 +203,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
-                        <button class="btn btn-danger" data-dismiss="modal" onclick=""><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                        <button class="btn btn-danger" onclick="#"><i class="fas fa-trash-alt mr-2"></i>Delete</button>
                     </div>
                 </div>            
             </div>
