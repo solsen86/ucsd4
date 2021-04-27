@@ -86,7 +86,14 @@ $('#deleteRecord').on('show.bs.modal', function (event) {
     console.log(link);
 
     var modal = $(this);
-    modal.find('.modal-title').text('Deleting Record for Device ' + deviceId);
-    modal.find('.modal-body p').text('Are you sure you want to delete the record for the asset with District ID #' + deviceId + '?');
-    modal.find('.modal-footer button').attr("onclick", link);
+    modal.find('.modal-title').text('Device ' + deviceId);
+    modal.find('.modal-body p').text('Are you sure you want to delete device ' + deviceId + '?');
+    modal.find('#delete').attr("onclick", link);
 });
+
+$('#validatedCustomFile').on('change',function(){
+    //get the file name
+    var fileName = $(this).val();
+    //replace the "Choose a file" label
+    $(this).next('.custom-file-label').html(fileName);
+})

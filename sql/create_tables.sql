@@ -206,7 +206,7 @@ CREATE TABLE assets (
 );
 
 INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id, 
-                    status_id, dev_type_id, os_id, asset_cpu, asset_hdd, 
+                    status_id, dev_type_id, os_id, asset_cpu, asset_hdd_size, 
                     asset_mem, asset_wlan_mac,
                     asset_sped_tag, asset_date, asset_age) VALUES 
     (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), (SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13" A1502'),
@@ -220,7 +220,7 @@ CREATE TABLE assignments (
     asset_tag SMALLINT(6) ZEROFILL NOT NULL,
     assignment_status ENUM('CHECKED IN', 'CHECKED OUT') NOT NULL DEFAULT 'CHECKED IN',
     PRIMARY KEY (assignment_id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
+    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag) ON DELETE CASCADE
 );
 
 INSERT INTO assignments (asset_tag, assignment_status) VALUES
@@ -234,7 +234,7 @@ CREATE TABLE checkouts (
     checkout_date_out TIMESTAMP NOT NULL DEFAULT CURDATE(),
     checkout_date_in TIMESTAMP NULL DEFAULT NULL,
     PRIMARY KEY (checkout_id),
-    FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id)
+    FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id) ON DELETE CASCADE
 );
 
 INSERT INTO checkouts (assignment_id, checkout_user) VALUES
@@ -249,5 +249,5 @@ CREATE TABLE notes (
     note_subject VARCHAR(50) NOT NULL,
     note_text TEXT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag)
+    FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag) ON DELETE CASCADE
 );  

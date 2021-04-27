@@ -34,9 +34,9 @@
         
         <!-- Top Navbar  -->
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-            <a class="navbar-brand" href="dashboard.php">
+            <a class="navbar-brand" href="./assets.php">
                 <img src="./img/logo.ico">    
-                UCSD#4 IT
+                Information Technology
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -107,9 +107,9 @@
             <div class="row">
                 
                 <!-- DB Record options -->
-                <div class="container-fluid my-2 ml-0">
-                        <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
-                        <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from Excel/CSV</button>
+                <div class="container-fluid my-2">
+                        <button class="btn btn-outline-secondary mb-2 mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
+                        <button class="btn btn-outline-secondary mb-2 mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
                 </div> 
 
                 <div class="container-fluid">
@@ -142,23 +142,24 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">
-                            Upload from Excel/CSV
+                            Upload from CSV
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" novalidate>
+                        <form action="./upload.php" class="needs-validated">
                             <div class="custom-file">
-                                <input type="file" accept=".xlsx,.csv" class="custom-file-input" id="validatedCustomFile" required>
+                                <input type="file" accept=".xlsx,.csv" class="form-control-file custom-file-input" id="validatedCustomFile" required>
                                 <label class="custom-file-label" for="validatedCustomFile">Choose File...</label>
                                 <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
                             </div>
+                            <div>
+                                <button class="btn btn-success my-2 ml-2 float-right" type="submit"><i class="fas fa-file-import mr-2"></i>Upload File</button>
+                                <button class="btn btn-outline-secondary my-2 float-right" type="button" data-dismiss="modal">Cancel</button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>            
             </div>
@@ -203,7 +204,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
-                        <button class="btn btn-danger" onclick="#"><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                        <button type="button" id="delete"class="btn btn-danger" onclick=""><i class="fas fa-trash-alt mr-2"></i>Delete</button>
                     </div>
                 </div>            
             </div>
