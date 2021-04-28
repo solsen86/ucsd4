@@ -76,24 +76,33 @@ $(window).on('load', function () {
         stateSave: true
     });
 
-
+    $('#deleteRecord').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var deviceId = button.data('id');
+        //var link = "location.href='delete.php?id=" + deviceId + "'";
+        //console.log(link);
+    
+        var modal = $(this);
+        modal.find('.modal-title').text('Device ' + deviceId);
+        modal.find('.modal-body p').text('Are you sure you want to delete device ' + deviceId + '?');
+        modal.find('#asset_tag').val(deviceId);
+        //modal.find('#delete').attr("onclick", link);
+    });
+    
+    $('#validatedCustomFile').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    });
+    
+    $('#uploadCsv').on("submit", function() {
+        var fileType = ".csv";
+        var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + fileType + ")$");
+        if(!regex.test($("#validatedCustomFile").val().toLowerCase())) {
+            return false;
+        }
+        return true;
+    });
 });
 
-$('#deleteRecord').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var deviceId = button.data('id');
-    var link = "location.href='delete.php?id=" + deviceId + "'";
-    console.log(link);
-
-    var modal = $(this);
-    modal.find('.modal-title').text('Device ' + deviceId);
-    modal.find('.modal-body p').text('Are you sure you want to delete device ' + deviceId + '?');
-    modal.find('#delete').attr("onclick", link);
-});
-
-$('#validatedCustomFile').on('change',function(){
-    //get the file name
-    var fileName = $(this).val();
-    //replace the "Choose a file" label
-    $(this).next('.custom-file-label').html(fileName);
-})

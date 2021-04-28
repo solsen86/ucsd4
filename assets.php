@@ -149,14 +149,14 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="./upload.php" class="needs-validated">
+                        <form action="upload.php" id="uploadCsv" name="uploadCsv" enctype="multipart/form-data" method="post" class="needs-validated">
                             <div class="custom-file">
-                                <input type="file" accept=".xlsx,.csv" class="form-control-file custom-file-input" id="validatedCustomFile" required>
+                                <input type="file" accept=".csv" class="form-control-file custom-file-input" id="validatedCustomFile" name="filename" required>
                                 <label class="custom-file-label" for="validatedCustomFile">Choose File...</label>
                                 <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
                             </div>
                             <div>
-                                <button class="btn btn-success my-2 ml-2 float-right" type="submit"><i class="fas fa-file-import mr-2"></i>Upload File</button>
+                                <button class="btn btn-success my-2 ml-2 float-right" type="submit" name="submit"><i class="fas fa-file-import mr-2"></i>Upload File</button>
                                 <button class="btn btn-outline-secondary my-2 float-right" type="button" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
@@ -203,8 +203,11 @@
                         <p>Are you sure you want to delete this record?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
-                        <button type="button" id="delete"class="btn btn-danger" onclick=""><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                        <form id="deleteForm" action="" method="post">
+                            <input type="hidden" id="asset_tag" value="">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
+                            <button type="submit" id="delete"class="btn btn-danger"><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                        </form>
                     </div>
                 </div>            
             </div>

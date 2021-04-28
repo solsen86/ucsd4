@@ -7,11 +7,10 @@
         // Bind asset tag to prepared sql statement
         mysqli_stmt_bind_param($stmt, "i", $asset_tag);
 
-        $asset_tag = trim($_GET['id']);
+        $asset_tag = trim($_POST['asset_tag']);
         
         if(mysqli_stmt_execute($stmt)){
-            header("location: ./assets.php");
-            exit();
+            echo "Record with District ID " . $asset_tag . "" ;
         } else{
             echo "Opps! Something went wrong. Please try again later.";
             header("location: ./assets.php");
