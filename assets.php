@@ -203,8 +203,8 @@
                         <p>Are you sure you want to delete this record?</p>
                     </div>
                     <div class="modal-footer">
-                        <form id="deleteForm" action="" method="post">
-                            <input type="hidden" id="asset_tag" value="">
+                        <form id="deleteForm" action="" method="">
+                            <input type="hidden" id="asset_tag" name="asset_tag" value="">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
                             <button type="submit" id="delete"class="btn btn-danger"><i class="fas fa-trash-alt mr-2"></i>Delete</button>
                         </form>
@@ -212,6 +212,8 @@
                 </div>            
             </div>
         </div>
+
+        <div class="alert alert-success" id="result">Record deleted successfully</div>
             <!-- sidebar - colapses on smaller screens -->
             <!-- <div class="sidebar d-lg-block d-none bg-secondary p-0">
                 <div class="sidebar-container btn-group-vertical btn-group-justified">

@@ -76,18 +76,7 @@ $(window).on('load', function () {
         stateSave: true
     });
 
-    $('#deleteRecord').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var deviceId = button.data('id');
-        //var link = "location.href='delete.php?id=" + deviceId + "'";
-        //console.log(link);
-    
-        var modal = $(this);
-        modal.find('.modal-title').text('Device ' + deviceId);
-        modal.find('.modal-body p').text('Are you sure you want to delete device ' + deviceId + '?');
-        modal.find('#asset_tag').val(deviceId);
-        //modal.find('#delete').attr("onclick", link);
-    });
+   
     
     $('#validatedCustomFile').on('change',function(){
         //get the file name
@@ -104,5 +93,35 @@ $(window).on('load', function () {
         }
         return true;
     });
+
+    $('#deleteRecord').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var deviceId = button.data('id');
+        //var link = "location.href='delete.php?id=" + deviceId + "'";
+        //console.log(link);
+    
+        var modal = $(this);
+        modal.find('.modal-title').text('Device ' + deviceId);
+        modal.find('.modal-body p').text('Are you sure you want to delete device ' + deviceId + '?');
+        modal.find('#asset_tag').val(deviceId);
+        //modal.find('#delete').attr("onclick", link);
+    });
+
+    $('#deleteForm').on('submit', function(e) {
+        var asset_tag = $(this).data('asset_tag');
+
+        $.ajax({
+            type: "POST",
+            url: "./delete.php",
+            data: { asset_tag:asset_tag },
+            success: function(result) {
+                
+                alert(result);
+            }
+        
+        });
+
+    });
+
 });
 

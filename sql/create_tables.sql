@@ -48,7 +48,7 @@ CREATE TABLE models (
 INSERT INTO models (brand_id, model_name) VALUES
     ((SELECT brand_id FROM brands WHERE brand_name = 'Acer'), 'C910'),
     ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Pro A1278'),
-    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Pro 13.3" A1502'),
+    ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'Macbook Pro 13" A1502'),
     ((SELECT brand_id FROM brands WHERE brand_name = 'Apple'), 'iMac 21.5" A1418'),
     ((SELECT brand_id FROM brands WHERE brand_name = 'Dell'), 'OptiPlex 7010'),
     ((SELECT brand_id FROM brands WHERE brand_name = 'ByteSpeed'), 'H81M-C'),

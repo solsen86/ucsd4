@@ -1,26 +1,28 @@
 <?php 
-    require_once './config.php';
+include "./config.php";
 
-    $sql = "DELETE  assets FROM assets WHERE asset_tag = ?";
+$asset_tag = 0;
+if(isset($_POST['asset_tag'])){
+   $asset_tag = mysqli_real_escape_string($con,$_POST['asset_tag']);
+}
+if($asset_tag > 0){
 
-    if($stmt = mysqli_prepare($link, $sql)) {
-        // Bind asset tag to prepared sql statement
-        mysqli_stmt_bind_param($stmt, "i", $asset_tag);
+  // Check record exists
+  $checkRecord = mysqli_query($con,"SELECT * FROM posts WHERE id=".$asset_tag);
+  $totalrows = mysqli_num_rows($checkRecord);
 
-        $asset_tag = trim($_POST['asset_tag']);
-        
-        if(mysqli_stmt_execute($stmt)){
-            echo "Record with District ID " . $asset_tag . "" ;
-        } else{
-            echo "Opps! Something went wrong. Please try again later.";
-            header("location: ./assets.php");
-            exit();
-        }
+  if($totalrows > 0){
+    // Delete record
+    $query = "DELETE FROM assets WHERE asset_tag=".$asset_tag;
+    mysqli_query($con,$query);
+    echo 1;
+    exit;
+  }else{
+    echo 0;
+    exit;
+  }
+}
 
-    // close statement
-    mysqli_stmt_close($stmt);
-    
-    // close connection
-    mysqli_close($link);
-    }
+echo 0;
+exit;
 ?>
