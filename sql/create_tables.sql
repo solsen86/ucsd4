@@ -273,7 +273,7 @@ INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id,
                     status_id, dev_type_id, os_id, asset_cpu, asset_hdd_size, 
                     asset_mem, asset_wlan_mac,
                     asset_sped_tag, asset_date, asset_age) VALUES 
-    (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), (SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13" A1502'),
+    (8538, UPPER('tech-olsens-853'), UPPER('c02t66b0fvh4'), (SELECT model_id FROM models WHERE model_name = 'Macbook Pro 13.3" A1502'),
         (SELECT room_id FROM rooms WHERE room_number = '140'), (SELECT status_id FROM dev_status WHERE status_name = 'In Service'), (SELECT dev_type_id from dev_types WHERE dev_type = 'Laptop'),
         (SELECT os_id FROM systems WHERE os_name = 'Windows'), 'i7-8650U', 512, 16, UPPER('186590cdb871'), 'NO', (STR_TO_DATE('03/13/2017','%m/%d/%Y')),
         (TIMESTAMPDIFF(YEAR,(STR_TO_DATE('03/13/2017','%m/%d/%Y')),CURDATE())));

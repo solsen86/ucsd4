@@ -1,28 +1,21 @@
 <?php 
-include "./config.php";
+require_once "./config.php";
 
-$asset_tag = 0;
-if(isset($_POST['asset_tag'])){
-   $asset_tag = mysqli_real_escape_string($con,$_POST['asset_tag']);
-}
-if($asset_tag > 0){
+$asset_tag = mysqli_real_escape_string($link, $_POST['asset_tag']);
 
-  // Check record exists
-  $checkRecord = mysqli_query($con,"SELECT * FROM posts WHERE id=".$asset_tag);
-  $totalrows = mysqli_num_rows($checkRecord);
+// Check record exists
+$checkRecord = mysqli_query($link,"SELECT * FROM assets WHERE asset_tag=".$asset_tag);
+$totalrows = mysqli_num_rows($checkRecord);
 
-  if($totalrows > 0){
-    // Delete record
-    $query = "DELETE FROM assets WHERE asset_tag=".$asset_tag;
-    mysqli_query($con,$query);
-    echo 1;
-    exit;
-  }else{
-    echo 0;
-    exit;
-  }
-}
-
+if($totalrows > 0){
+// Delete record
+$query = "DELETE FROM assets WHERE asset_tag=".$asset_tag;
+mysqli_query($link,$query);
+echo 1;
+exit;
+}else{
 echo 0;
 exit;
+}
+
 ?>

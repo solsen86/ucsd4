@@ -203,10 +203,10 @@
                         <p>Are you sure you want to delete this record?</p>
                     </div>
                     <div class="modal-footer">
-                        <form id="deleteForm" action="" method="">
+                        <form id="deleteForm">
                             <input type="hidden" id="asset_tag" name="asset_tag" value="">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
-                            <button type="submit" id="delete"class="btn btn-danger"><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt mr-2"></i>Delete</button>
                         </form>
                     </div>
                 </div>            

@@ -75,8 +75,6 @@ $(window).on('load', function () {
         pageResize: true,
         stateSave: true
     });
-
-   
     
     $('#validatedCustomFile').on('change',function(){
         //get the file name
@@ -108,20 +106,22 @@ $(window).on('load', function () {
     });
 
     $('#deleteForm').on('submit', function(e) {
-        var asset_tag = $(this).data('asset_tag');
+        var asset_tag = $(this).serialize();
+        console.log(asset_tag);
 
         $.ajax({
             type: "POST",
             url: "./delete.php",
-            data: { asset_tag:asset_tag },
-            success: function(result) {
-                
-                alert(result);
+            data: asset_tag,
+            success: function(response) {
+                if(response == 1) {
+                    console.log("Successfully Deleted!");
+                } else {
+                    console.log("Failed to be deleted");
+                }
             }
-        
         });
-
+        e.preventDefault();
     });
-
 });
 
