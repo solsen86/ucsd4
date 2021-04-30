@@ -32,3 +32,13 @@ div.dataTables_length {
     display: none;
 }
 
+.alert-fixed {
+    margin: 0 auto;
+    position: absolute; 
+    bottom: 0px;
+    left: 50%;
+    margin-left: -225px; 
+    width: 450px;
+    z-index:9999; 
+    border-radius:15px
+}

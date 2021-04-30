@@ -1,7 +1,7 @@
-$(window).on('load', function () {
+$(window).on('load change', function () {
     $('#asset_table').DataTable( {
         ajax: {
-            url: 'get_data.php',
+            url: './get_data.php',
             contentType: 'application/json'
         },
         columns: [
@@ -34,7 +34,9 @@ $(window).on('load', function () {
             searchPanes: {
                 clearMessage: 'Clear All',
                 collapse: {0: '<i class="fas fa-filter"></i>', _: '<i class="fas fa-filter"></i>'},
-            }
+                emptyPanes: null
+            },
+            emptyTable: "No records exist in Database",
         },
         buttons: [
             {
@@ -109,6 +111,12 @@ $(window).on('load', function () {
         var asset_tag = $(this).serialize();
         console.log(asset_tag);
 
+        var elem = document.getElementById(asset_tag.split('=')[1]);
+        var row = $(elem).closest('tr');
+
+        // hide modal after submit
+        $('#deleteRecord').modal('hide')
+
         $.ajax({
             type: "POST",
             url: "./delete.php",
@@ -116,8 +124,27 @@ $(window).on('load', function () {
             success: function(response) {
                 if(response == 1) {
                     console.log("Successfully Deleted!");
+                    // remove row
+                    $(row).css('background', 'tomato');
+                    $(row).fadeOut(800, function() {
+                        $(this).remove();
+                    });
+
+                    $('#result').append('<div id="alert-result" class="alert alert-success" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Record removed successfully!</strong></div>');
+
+                    setTimeout(function() {
+                        $('#alert-result').remove();
+                    }, 5000);
+
+                    
+                    //$('#asset_table').DataTable().ajax.reload();
                 } else {
                     console.log("Failed to be deleted");
+                    $('#result').append('<div id="alert-result" class="alert alert-danger" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failed to remove record!</strong></div>');
+                    
+                    setTimeout(function() {
+                        $('#alert-result').remove();
+                    }, 5000);
                 }
             }
         });

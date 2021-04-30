@@ -103,17 +103,15 @@
 
         <!-- Content Area -->
         <div class="container-fluid flex-grow-1 bg-light h-100" id="window">
-            <!-- Data Table -->
-            <div class="row">
-                
-                <!-- DB Record options -->
-                <div class="container-fluid my-2">
-                        <button class="btn btn-outline-secondary mb-2 mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
-                        <button class="btn btn-outline-secondary mb-2 mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
-                </div> 
+            <div id="result" class="alert-fixed"></div>
 
-                <div class="container-fluid">
-                    <table id="asset_table" class="display pageResize h-100" style="width:100%">
+            <!-- Data Table -->
+            <div class="row h-100">
+                <div class="container-fluid h-100">
+                    <!-- DB Record options -->
+                    <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
+                    <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button> 
+                    <table id="asset_table" class="display pageResize" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Building</th>
@@ -213,7 +211,6 @@
             </div>
         </div>
 
-        <div class="alert alert-success" id="result">Record deleted successfully</div>
             <!-- sidebar - colapses on smaller screens -->
             <!-- <div class="sidebar d-lg-block d-none bg-secondary p-0">
                 <div class="sidebar-container btn-group-vertical btn-group-justified">
