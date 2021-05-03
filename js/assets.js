@@ -78,20 +78,19 @@ $(window).on('load change', function () {
         stateSave: true
     });
     
-    $('#validatedCustomFile').on('change',function(){
+    $('#filepath').on('change',function(){
         //get the file name
-        var fileName = $(this).val();
+        var fileName = $(this).val().split("\\").pop();
         //replace the "Choose a file" label
-        $(this).next('.custom-file-label').html(fileName);
+        $('#filename').addClass("selected").html(fileName);
     });
     
-    $('#uploadCsv').on("submit", function() {
-        var fileType = ".csv";
-        var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + fileType + ")$");
-        if(!regex.test($("#validatedCustomFile").val().toLowerCase())) {
-            return false;
-        }
-        return true;
+    $('#uploadCsv').on("submit", function(e) {
+    
+        var file_name = $(this).serialize();
+        console.log(file_name)
+
+        e.preventDefault();
     });
 
     $('#deleteRecord').on('show.bs.modal', function (event) {

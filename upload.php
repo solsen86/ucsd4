@@ -9,7 +9,12 @@ if(isset($_POST["submit"])) {
         
         // open the file
         $file = fopen($filename, "r");
-        $csv_rows[] = array();
+
+        // sql multi-query string:
+        $sql = '';
+
+        // insert strings:
+        $insert_rooms -> $insert_brands -> $insert_models -> $insert_assets -> $insert_assignments -> $insert_checkouts = '';
 
         // read each row of the csv file into the csv_rows[] array
         While (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
@@ -109,60 +114,27 @@ if(isset($_POST["submit"])) {
             if (isset($column[23])) {
                 $sped = mysqli_real_escape_string($link, $column[23]);
             }    
-     
-            // add row values to array to send to generate insert statements. 
-            $csv_rows[] = array(
-                "bldg" => $bldg,
-                "room" => $room,
-                "loc" => $loc,
-                "user" => $user,
-                "name" => $name,
-                "tag" => $tag,
-                "type" => $type,
-                "make" => $make,
-                "model" => $model,
-                "sn" => $sn,
-                "os" => $os,
-                "cpu" => $cpu,
-                "s_type" => $s_type,
-                "s_size" => $s_size,
-                "mem" => $mem,
-                "ip" => $ip,
-                "w_mac" => $w_mac,
-                "l_mac" => $l_mac,
-                "d_purchase" => $d_purchase,
-                "d_checkout" => $d_checkout,
-                "d_checkin" => $d_checkin,
-                "status" => $status,
-                "price" => $price,
-                "sped" => $sped
-            );
+            
+            $insert_rooms .= "INSERT IGNORE INTO rooms (building_id,room_number) VALUES ((SELECT building_id FROM buildings WHERE building_code = " . $bldg ." ), " . $room . ");";
+            $insert_brands .= "INSERT IGNORE INTO brands (brand_name) VALUES (" . $make . ");";
+            $insert_models .= "INSERT IGNORE INTO models (brand_id,model_name) VALUES ((SELECT brand_id FROM brands WHERE brand_name = " . $make ." ), " . $model . ");";
+            $insert_assets .= "INSERT IGNORE INTO assets (asset_tag,asset_location,asset_name,asset_serial,model_id,room_id,status_id,dev_type_id,os_id," 
+                          . "asset_cpu,asset_hdd_type,asset_hdd_size,asset_mem,asset_static_ip,asset_wlan_mac,asset_lan_mac,asset_sped_tag,asset_date,asset_price) VALUES (" 
+                          . $tag . "," . $loc . "," . $name . "," . $sn . ", (SELECT model_id FROM models WHERE model_name = " . $model 
+                          . "),(SELECT room_id FROM rooms WHERE room_number =" . $room . "),(SELECT status_id FROM dev_status WHERE status_name = " . $status 
+                          . "),(SELECT dev_type_id FROM dev_types WHERE dev_type = " . $type . "),(SELCECT os_id FROM systems WHERE os_name = " . $os . ")," . $cpu 
+                          . "," . $s_type . "," . $s_size . "," . $mem . "," . $ip . "," . $w_mac . "," . $l_mac . "," . $sped . ", (STR_TO_DATE(" . $d_purchase .",'%m/%d/%Y')," 
+                          . $price . ");";
+            $insert_assignments .= "INSERT IGNORE INTO assignments (asset_tag,assignment_user,) VALUES (";
         }
 
-        $num_inserted = 0;
-        $num_failed = 0;
-        $err_rows = array();
+        $sql .= $insert_rooms . $insert_brands . $insert_models . $insert_assets . $insert_assignments . $insert_checkouts;
 
-        // convert each csv row into a multi query insert statementk
-        for($i = 1; $i < count($csv_rows); $i++ ) {
-            $query = "";
-            
-            if($csv_rows[$i]['room'] != "") {
-                $insert_rooms = "INSERT IGNORE INTO rooms (building_id,room_number) VALUES ("
-                                                          . $csv_rows[$i]['bldg'] . "," . $csv_rows[$i]['room'] . ")";
-
-            }
-            $insert_models = "INSERT IGNORE INTO models ( brand_id, model_name) VALUES (";
-            $insert_assets = "INSERT IGNORE INTO assets (asset_tag,asset_location,asset_name,asset_serial,model_id,room_id,status_id,dev_type_id,os_id," 
-                                                        . "asset_cpu,asset_hdd_type,asset_hdd_size,asset_mem,asset_static_ip,asset_wlan_mac"
-                                                        . "asset_lan_mac,asset_sped_tag,asset_bios_password,asset_date,asset_price) VALUES ("
-                                                        . $csv_rows[i]['tag'] . "," . $csv_rows[i]['loc'] . "," . $csv_rows[i]['name'] . ","
-                                                        . $csv_rows[i]['sn'  ] . ",";
-            $insert_assignments = "INSERT IGNORE INTO assignments (";
-            
-            
+        if(mysqli_multi_query($link, $sql)) {
+            echo 1;
+        } else {
+            echo 0;
         }
-        
     }
 }
 

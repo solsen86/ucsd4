@@ -281,28 +281,25 @@ INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id,
 -- assignments
 CREATE TABLE assignments (
     assignment_id INT NOT NULL AUTO_INCREMENT,
-    asset_tag SMALLINT(6) ZEROFILL NOT NULL,
+    asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
+    assignment_user VARCHAR(50) NOT NULL
     assignment_status ENUM('CHECKED IN', 'CHECKED OUT') NOT NULL DEFAULT 'CHECKED IN',
     PRIMARY KEY (assignment_id),
     FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag) ON DELETE CASCADE
 );
 
-INSERT INTO assignments (asset_tag, assignment_status) VALUES
-    (8538, 'CHECKED OUT');
+INSERT INTO assignments (asset_tag, assignment_user, assignment_status) VALUES
+    (8538, 'Seth Olsen', 'CHECKED OUT');
 
 -- CREATE TABLE CHECKOUTS
 CREATE TABLE checkouts (
     checkout_id INT NOT NULL AUTO_INCREMENT,
     assignment_id INT NOT NULL,
-    checkout_user VARCHAR(50) NOT NULL,
     checkout_date_out TIMESTAMP NOT NULL DEFAULT CURDATE(),
     checkout_date_in TIMESTAMP NULL DEFAULT NULL,
     PRIMARY KEY (checkout_id),
     FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id) ON DELETE CASCADE
 );
-
-INSERT INTO checkouts (assignment_id, checkout_user) VALUES
-    (1, 'Seth Olsen');
 
 -- Notes
 CREATE TABLE notes (

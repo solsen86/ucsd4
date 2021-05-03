@@ -136,7 +136,7 @@
 
         <!-- Bulk Upload Modal -->
         <div class="modal fade" tabindex="-1" id="fileUpload" role="dialog">
-            <div class="modal-dialog" role="document" >
+            <div class="modal-dialog" role="dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">
@@ -147,10 +147,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="upload.php" id="uploadCsv" name="uploadCsv" enctype="multipart/form-data" method="post" class="needs-validated">
+                        <form id="uploadCsv" name="uploadCsv">
                             <div class="custom-file">
-                                <input type="file" accept=".csv" class="form-control-file custom-file-input" id="validatedCustomFile" name="filename" required>
-                                <label class="custom-file-label" for="validatedCustomFile">Choose File...</label>
+                                <input type="file" accept=".csv" class="custom-file-input" id="filepath" name="filepath" required>
+                                <label class="custom-file-label" id="filename" for="validatedCustomFile">Choose File...</label>
                                 <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
                             </div>
                             <div>
