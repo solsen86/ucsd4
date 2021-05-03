@@ -139,16 +139,28 @@ if(isset($_POST["submit"])) {
             );
         }
 
-        $insert_stmts = array();
-        $number_inserted = 0;
+        $num_inserted = 0;
+        $num_failed = 0;
+        $err_rows = array();
 
         // convert each csv row into a multi query insert statementk
         for($i = 1; $i < count($csv_rows); $i++ ) {
-            $insert_rooms = "";
-            $insert_rooms = "";
-            $insert_rooms = "";
-            $insert_rooms = "";
+            $query = "";
+            
+            if($csv_rows[$i]['room'] != "") {
+                $insert_rooms = "INSERT IGNORE INTO rooms (building_id,room_number) VALUES ("
+                                                          . $csv_rows[$i]['bldg'] . "," . $csv_rows[$i]['room'] . ")";
 
+            }
+            $insert_models = "INSERT IGNORE INTO models ( brand_id, model_name) VALUES (";
+            $insert_assets = "INSERT IGNORE INTO assets (asset_tag,asset_location,asset_name,asset_serial,model_id,room_id,status_id,dev_type_id,os_id," 
+                                                        . "asset_cpu,asset_hdd_type,asset_hdd_size,asset_mem,asset_static_ip,asset_wlan_mac"
+                                                        . "asset_lan_mac,asset_sped_tag,asset_bios_password,asset_date,asset_price) VALUES ("
+                                                        . $csv_rows[i]['tag'] . "," . $csv_rows[i]['loc'] . "," . $csv_rows[i]['name'] . ","
+                                                        . $csv_rows[i]['sn'  ] . ",";
+            $insert_assignments = "INSERT IGNORE INTO assignments (";
+            
+            
         }
         
     }
