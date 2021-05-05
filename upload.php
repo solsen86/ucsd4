@@ -3,18 +3,15 @@
 require_once './config.php';
 
 if(isset($_POST["submit"])) {
-    $filename = $_FILES["filename"]["tmp_name"];
+    $filepath = $_FILES["filepath"]["tmp_name"];
 
-    if($_FILES["filename"]["size"] > 0) {
+    if($_FILES["filepath"]["size"] > 0) {
         
         // open the file
-        $file = fopen($filename, "r");
-
-        // sql multi-query string:
-        $sql = '';
+        $file = fopen($filepath, "r");
 
         // insert strings:
-        $insert_rooms -> $insert_brands -> $insert_models -> $insert_assets -> $insert_assignments -> $insert_checkouts = '';
+        $insert_rooms = $insert_brands = $insert_models = $insert_assets = $insert_assignments = $insert_checkouts = '';
 
         // read each row of the csv file into the csv_rows[] array
         While (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
@@ -115,20 +112,20 @@ if(isset($_POST["submit"])) {
                 $sped = mysqli_real_escape_string($link, $column[23]);
             }    
             
-            $insert_rooms .= "INSERT IGNORE INTO rooms (building_id,room_number) VALUES ((SELECT building_id FROM buildings WHERE building_code = " . $bldg ." ), " . $room . ");";
-            $insert_brands .= "INSERT IGNORE INTO brands (brand_name) VALUES (" . $make . ");";
-            $insert_models .= "INSERT IGNORE INTO models (brand_id,model_name) VALUES ((SELECT brand_id FROM brands WHERE brand_name = " . $make ." ), " . $model . ");";
+            $insert_rooms .= "INSERT IGNORE INTO rooms (building_id,room_number) VALUES ((SELECT building_id FROM buildings WHERE building_code = '" . $bldg ."'), '" . $room . "');";
+            $insert_brands .= "INSERT IGNORE INTO brands (brand_name) VALUES ('" . $make . "');";
+            $insert_models .= "INSERT IGNORE INTO models (brand_id,model_name) VALUES ((SELECT brand_id FROM brands WHERE brand_name = '" . $make ."'), '" . $model . "');";
             $insert_assets .= "INSERT IGNORE INTO assets (asset_tag,asset_location,asset_name,asset_serial,model_id,room_id,status_id,dev_type_id,os_id," 
                           . "asset_cpu,asset_hdd_type,asset_hdd_size,asset_mem,asset_static_ip,asset_wlan_mac,asset_lan_mac,asset_sped_tag,asset_date,asset_price) VALUES (" 
-                          . $tag . "," . $loc . "," . $name . "," . $sn . ", (SELECT model_id FROM models WHERE model_name = " . $model 
-                          . "),(SELECT room_id FROM rooms WHERE room_number =" . $room . "),(SELECT status_id FROM dev_status WHERE status_name = " . $status 
-                          . "),(SELECT dev_type_id FROM dev_types WHERE dev_type = " . $type . "),(SELCECT os_id FROM systems WHERE os_name = " . $os . ")," . $cpu 
-                          . "," . $s_type . "," . $s_size . "," . $mem . "," . $ip . "," . $w_mac . "," . $l_mac . "," . $sped . ", (STR_TO_DATE(" . $d_purchase .",'%m/%d/%Y')," 
+                          . $tag . ",'" . $loc . "','" . $name . "','" . $sn . "', (SELECT model_id FROM models WHERE model_name = '" . $model 
+                          . "'),(SELECT room_id FROM rooms WHERE room_number ='" . $room . "'),(SELECT status_id FROM dev_status WHERE status_name = '" . $status 
+                          . "'),(SELECT dev_type_id FROM dev_types WHERE dev_type = '" . $type . "'),(SELCECT os_id FROM systems WHERE os_name = '" . $os . "'),'" . $cpu 
+                          . "','" . $s_type . "','" . $s_size . "','" . $mem . "','" . $ip . "','" . $w_mac . "','" . $l_mac . "','" . $sped . "', (STR_TO_DATE(" . $d_purchase .",'%m/%d/%Y')," 
                           . $price . ");";
-            $insert_assignments .= "INSERT IGNORE INTO assignments (asset_tag,assignment_user,) VALUES (";
+            //$insert_assignments .= "INSERT IGNORE INTO assignments (asset_tag,assignment_user,) VALUES (";
         }
 
-        $sql .= $insert_rooms . $insert_brands . $insert_models . $insert_assets . $insert_assignments . $insert_checkouts;
+        $sql = $insert_rooms . $insert_brands . $insert_models . $insert_assets;
 
         if(mysqli_multi_query($link, $sql)) {
             echo 1;

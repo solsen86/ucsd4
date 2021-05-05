@@ -172,7 +172,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="uploadCsv" name="uploadCsv">
+                        <form id="uploadCsv" name="uploadCsv" action="upload.php" enctype="multipart/form-data" method="post">
                             <div class="custom-file">
                                 <input type="file" accept=".csv" class="custom-file-input" id="filepath" name="filepath" required>
                                 <label class="custom-file-label" id="filename" for="validatedCustomFile">Choose File...</label>

@@ -2,17 +2,11 @@ $(window).on('load change', function () {
 
     $('#filepath').on('change',function(){
         //get the file name
-        var fileName = $(this).val().split("\\").pop();
+        var filepath = $(this).val();
+        console.log(filepath);
+        var fileName = filepath.split("\\").pop();
         //replace the "Choose a file" label
         $('#filename').addClass("selected").html(fileName);
-    });
-    
-    $('#uploadCsv').on("submit", function(e) {
-    
-        var file_name = $(this).serialize();
-        console.log(file_name)
-
-        e.preventDefault();
     });
 
     $('#deleteRecord').on('show.bs.modal', function (event) {
