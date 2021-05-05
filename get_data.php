@@ -1,7 +1,9 @@
 <?php
 include_once 'config.php';
 
-$return_arr = array();
+$rows = array();
+$total = 0;
+
 
 $sql = "SELECT buildings.building_code, rooms.room_number, dev_types.dev_type, assets.asset_tag,
     assets.asset_name, assets.asset_location, brands.brand_name, models.model_name, assets.asset_serial, systems.os_name,
@@ -43,11 +45,18 @@ if($result = mysqli_query($link, $sql)){
             $asset_bios_password = $row['asset_bios_password'];
             $asset_sped_tag = $row['asset_sped_tag'];
             $asset_date  = date_create($row['asset_date']);
+            $purchase_date = $asset_date->format("m/d/Y");
             $asset_age = date_diff($asset_date, date_create(date('Y-m-d')))->format('%y');
             $asset_price = $row['asset_price'];
+            if($asset_price != "") {
+                $price = "$" . $asset_price;
+            } else {
+                $price = null;
+            }
+
             $status_name = $row['status_name'];
 
-            $return_arr[] = array(
+            $rows[] = array(
                 "building" => $building_code,
                 "room" => $room_number,
                 "location" => $asset_location,
@@ -67,19 +76,21 @@ if($result = mysqli_query($link, $sql)){
                 "ip" => $asset_static_ip,
                 "bios" => $asset_bios_password,
                 "sped" => $asset_sped_tag,
-                "date" => $asset_date,
+                "date" => $purchase_date,
                 "age" => $asset_age,
-                "price" => $asset_price,
+                "price" => $price,
                 "status" => $status_name,
                 "actions" => '<a href="details.php?id=' . $asset_tag . '" class="mr-3 title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a> <a data-target="#deleteRecord" data-toggle="modal" id="'. $asset_tag . '" data-id="' . $asset_tag . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>'
             );
+
+            $total++;
         }
 
         // Free result
         mysqli_free_result($result);
     } 
 } else {
-    $return_arr[] = array(
+    $rows[] = array(
         "building" => '',
         "room" => '',
         "location" => '',
@@ -110,6 +121,12 @@ if($result = mysqli_query($link, $sql)){
 // close connection
 mysqli_close($link);
 
+$json_array = array(
+    "total" => $total,
+    "totalNotFilterd" => $total,
+    "rows" => $rows
+);
+
 // return JSON string
-        echo json_encode(array('data' => $return_arr));
+        echo json_encode($json_array);
 ?>

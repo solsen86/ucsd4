@@ -21,12 +21,13 @@
         <!-- Bootstrap & CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css"> -->
         <!-- <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.5.3/css/colReorder.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"></link> -->
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
         <link rel="stylesheet" href="./css/main.css">
         
     </head>
@@ -109,24 +110,48 @@
             <div class="row h-100">
                 <div class="container-fluid h-100">
                     <!-- DB Record options -->
-                    <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
-                    <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button> 
-                    <table id="asset_table" class="display pageResize" style="width:100%">
+                    <div id="toolbar">
+                        <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
+                        <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
+                    </div> 
+                    <table id="table" class="table bootstrap-table table-sm"
+                        data-toggle="table"
+                        data-toolbar="#toolbar"
+                        data-search="true"
+                        data-show-multi-sort="true"
+                        data-filter-control="true"
+                        data-show-fullscreen="true"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                        data-minimum-count-columns="2"
+                        data-id-field="tag"
+                        data-url="get_data.php">
                         <thead>
                             <tr>
-                                <th>Building</th>
-                                <th>Room</th>
-                                <th>Location</th>
-                                <th>ID #</th>
-                                <th>Name</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>Device Type</th>
-                                <th>Serial #</th>
-                                <th>SPED</th>
-                                <th>Age</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th data-field="id" data-sortable="true" data-switchable="false">ID</th>
+                                <th data-field="building" data-sortable="true" data-switchable="false" data-filter-control="select">Building</th>
+                                <th data-field="room" data-sortable="true">Room</th>
+                                <th data-field="location" data-sortable="true">Location</th>
+                                <th data-field="name" data-sortable="true">Name</th>
+                                <th data-field="brand" data-sortable="true" data-switchable="false" data-filter-control="select">Brand</th>
+                                <th data-field="model" data-sortable="true" data-switchable="false" data-filter-control="select">Model</th>
+                                <th data-field="type" data-sortable="true" data-filter-control="select">Type</th>
+                                <th data-field="serial" data-sortable="true">SN</th>
+                                <th data-field="os" data-sortable="true" data-filter-control="select" data-visible="false">OS</th>
+                                <th data-field="cpu" data-sortable="true" data-filter-control="select" data-visible="false">CPU</th>
+                                <th data-field="hdd_type" data-sortable="true" data-visible="false">Storage Type</th>
+                                <th data-field="hdd_size" data-sortable="true" data-visible="false">Storage Size</th>
+                                <th data-field="mem" data-sortable="true" data-visible="false">RAM</th>
+                                <th data-field="ip" data-sortable="true" data-visible="false">IP Address</th>
+                                <th data-field="wlan" data-sortable="true" data-visible="false">WLAN MAC Addr.</th>
+                                <th data-field="lan" data-sortable="true"  data-visible="false">LAN MAC Addr.</th>
+                                <th data-field="bios" data-sortable="true"  data-visible="false">BIOS Pwd.</th>
+                                <th data-field="sped" data-sortable="true" data-filter-control="select">SPED</th>
+                                <th data-field="age" data-sortable="true">Age</th>
+                                <th data-field="date" data-sortable="true">Purchase Date</th>
+                                <th data-field="price" data-sortable="true" data-filter-control="select">Price</th>
+                                <th data-field="status" data-sortable="true">Status</th>
+                                <th data-field="actions" data-sortable="false" data-switchable="false">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -244,21 +269,20 @@
       
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script
-            src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous"></script><script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js">
-        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/plug-ins/1.10.24/features/pageResize/dataTables.pageResize.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+        <!-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> -->
+        <!-- <script src="https://cdn.datatables.net/plug-ins/1.10.24/features/pageResize/dataTables.pageResize.min.js"></script>
         <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
         <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script> -->
         <!-- <script src="https://cdn.datatables.net/colreorder/1.5.3/js/dataTables.colReorder.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script> -->
+        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
         <script type="text/javascript" src="./js/assets.js"></script>
     </body>
 </html>
