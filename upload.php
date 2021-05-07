@@ -11,15 +11,24 @@ if(isset($_POST["submit"])) {
         $file = fopen($filepath, "r");
 
         // insert strings:
-        $insert_rooms = $insert_brands = $insert_models = $insert_assets = $insert_assignments = $insert_checkouts = '';
+        $insert_rooms = "INSERT INTO rooms (building_id, room_name) VALUES ";
+        $insert_brands = "INSERT INTO rooms (brand_name) VALUES ";
+        $insert_models = "INSERT INTO rooms (brand_id, model_name) VALUES ";
+        $insert_assets = "INSERT INTO rooms (building_id, room_name) VALUES ";
+
+        // skip header row
+        $skip = 0;
 
         // read each row of the csv file into the csv_rows[] array
         While (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+            $skip++;
+            if($skip == 1) {continue;}
+
             $bldg = "";
             if (isset($column[0])) {
                 $bldg = mysqli_real_escape_string($link, $column[0]);
             } 
-            $room = "";
+            $rm = "";
             if (isset($column[1])) {
                 $room = mysqli_real_escape_string($link, $column[1]);
             }           
@@ -47,7 +56,7 @@ if(isset($_POST["submit"])) {
             if (isset($column[7])) {
                 $make = mysqli_real_escape_string($link, $column[7]);
             }
-            $model = "";
+            $mdl = "";
             if (isset($column[8])) {
                 $model = mysqli_real_escape_string($link, $column[8]);
             }     
@@ -112,17 +121,19 @@ if(isset($_POST["submit"])) {
                 $sped = mysqli_real_escape_string($link, $column[23]);
             }    
             
-            $insert_rooms .= "INSERT IGNORE INTO rooms (building_id,room_number) VALUES ((SELECT building_id FROM buildings WHERE building_code = '" . $bldg ."'), '" . $room . "');";
-            $insert_brands .= "INSERT IGNORE INTO brands (brand_name) VALUES ('" . $make . "');";
-            $insert_models .= "INSERT IGNORE INTO models (brand_id,model_name) VALUES ((SELECT brand_id FROM brands WHERE brand_name = '" . $make ."'), '" . $model . "');";
-            $insert_assets .= "INSERT IGNORE INTO assets (asset_tag,asset_location,asset_name,asset_serial,model_id,room_id,status_id,dev_type_id,os_id," 
-                          . "asset_cpu,asset_hdd_type,asset_hdd_size,asset_mem,asset_static_ip,asset_wlan_mac,asset_lan_mac,asset_sped_tag,asset_date,asset_price) VALUES (" 
-                          . $tag . ",'" . $loc . "','" . $name . "','" . $sn . "', (SELECT model_id FROM models WHERE model_name = '" . $model 
-                          . "'),(SELECT room_id FROM rooms WHERE room_number ='" . $room . "'),(SELECT status_id FROM dev_status WHERE status_name = '" . $status 
-                          . "'),(SELECT dev_type_id FROM dev_types WHERE dev_type = '" . $type . "'),(SELCECT os_id FROM systems WHERE os_name = '" . $os . "'),'" . $cpu 
-                          . "','" . $s_type . "','" . $s_size . "','" . $mem . "','" . $ip . "','" . $w_mac . "','" . $l_mac . "','" . $sped . "', (STR_TO_DATE(" . $d_purchase .",'%m/%d/%Y')," 
-                          . $price . ");";
-            //$insert_assignments .= "INSERT IGNORE INTO assignments (asset_tag,assignment_user,) VALUES (";
+            $insert_rooms .= "((SELECT building_id FROM buildings WHERE building_code = '" . $bldg . "'),'" . $rm . "'),";
+            $insert_brands .= "('" . $make . "')";
+            $model = mysqli_prepare($link,"INSERT IGNORE INTO models (brand_id,model_name) VALUES ((SELECT brand_id FROM brands WHERE brand_name = ?), ?);");
+            mysqli_stmt_bind_param($model, 'ss', $make, $mdl);
+            $insert_models .= $model;
+            $asset = mysqli_prepare($link,"INSERT IGNORE INTO assets (asset_tag,asset_location,asset_name,asset_serial,model_id,room_id,status_id,dev_type_id,os_id,
+                            asset_cpu,asset_hdd_type,asset_hdd_size,asset_mem,asset_static_ip,asset_wlan_mac,asset_lan_mac,asset_sped_tag,asset_date,asset_price) VALUES
+                            (?,?,?,?, (SELECT model_id FROM models WHERE model_name = ?),(SELECT room_id FROM rooms WHERE room_number = ?),
+                            (SELECT status_id FROM dev_status WHERE status_name = ?),(SELECT dev_type_id FROM dev_types WHERE dev_type = ?),
+                            (SELECT os_id FROM systems WHERE os_name = ?),?,?,?,?,?,?,?,?,(STR_TO_DATE(?,'%m/%d/%Y'),?);");
+            $pAsset = "issssssssssssssssid";
+            mysqli_bind_param($asset, $pAsset, $tag, $loc, $name, $sn, $mdl, $rm, $status, $type, $os, $cpu, $s_type, $s_size, $mem, $ip, $w_mac, $l_mac, $sped, $d_purchase, $price);
+            $insert_assets .= $asset;
         }
 
         $sql = $insert_rooms . $insert_brands . $insert_models . $insert_assets;
