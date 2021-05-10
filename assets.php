@@ -172,10 +172,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="uploadCsv" name="uploadCsv" action="upload.php" enctype="multipart/form-data" method="post">
+                        <form id="uploadCsv" name="uploadCsv" enctype="multipart/form-data">
                             <div class="custom-file">
-                                <input type="file" accept=".csv" class="custom-file-input" id="filepath" name="filepath" required>
-                                <label class="custom-file-label" id="filename" for="validatedCustomFile">Choose File...</label>
+                                <input type="file" accept=".csv" class="form-control-file" id="file" name="file" required>
+                                <label class="custom-file-label" for="file">Choose File...</label>
                                 <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
                             </div>
                             <div>
@@ -283,6 +283,7 @@
         <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script> -->
         <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
         <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
         <script type="text/javascript" src="./js/assets.js"></script>
     </body>
 </html>

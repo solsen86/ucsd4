@@ -40,7 +40,7 @@ INSERT INTO brands (brand_name) VALUES
 CREATE TABLE models (
     model_id INT NOT NULL AUTO_INCREMENT,
     brand_id INT NOT NULL,
-    model_name VARCHAR(50) NOT NULL,
+    model_name VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (model_id),
     FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
 );
@@ -282,7 +282,7 @@ INSERT INTO assets (asset_tag, asset_name, asset_serial, model_id, room_id,
 CREATE TABLE assignments (
     assignment_id INT NOT NULL AUTO_INCREMENT,
     asset_tag SMALLINT(6) ZEROFILL NOT NULL UNIQUE,
-    assignment_user VARCHAR(50) NOT NULL
+    assignment_user VARCHAR(50) NOT NULL,
     assignment_status ENUM('CHECKED IN', 'CHECKED OUT') NOT NULL DEFAULT 'CHECKED IN',
     PRIMARY KEY (assignment_id),
     FOREIGN KEY (asset_tag) REFERENCES assets(asset_tag) ON DELETE CASCADE
