@@ -108,14 +108,15 @@
 
             <!-- Data Table -->
             <div class="row h-100">
-                <div class="container-fluid h-100">
+                <div class="container-fluid">
                     <!-- DB Record options -->
                     <div id="toolbar">
-                        <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
-                        <button class="btn btn-outline-secondary my-2 mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
+                        <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
+                        <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
                     </div> 
-                    <table id="table" class="table bootstrap-table table-sm"
+                    <table id="table" class="table"
                         data-toggle="table"
+                        data-height="680"
                         data-toolbar="#toolbar"
                         data-search="true"
                         data-show-multi-sort="true"
@@ -172,7 +173,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="uploadCsv" name="uploadCsv" enctype="multipart/form-data">
+                        <form id="uploadCsv" name="uploadCsv" action="upload.php" method="post" enctype="multipart/form-data">
                             <div class="custom-file">
                                 <input type="file" accept=".csv" class="form-control-file" id="file" name="file" required>
                                 <label class="custom-file-label" for="file">Choose File...</label>

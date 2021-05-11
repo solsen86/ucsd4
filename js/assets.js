@@ -10,51 +10,41 @@ $(window).on('load change', function () {
     //     $('#filename').addClass("selected").html(fileName);
     // });
 
-    $('#uploadCsv').on('submit', function(event) {
-        event.preventDefault();
+    // $('#uploadCsv').on('submit', function(event) {
+    //     event.preventDefault();
+    //     //check if file is selected or not
+    //     if(file.length > 0) {
 
-        var fd = new FormData();
-        var file = $('#file')[0].files;
-
-        console.log(file);
-
-        //check if file is selected or not
-        if(file.length > 0) {
-            fd.append('file',file[0]);
-
-            $.ajax({
-                url: "./upload.php",
-                method: "POST",
-                data: fd,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                    // if(response == 1) {
-                    //     console.log("File Uploaded Successfully!");
-                    //     $('#result').append('<div id="alert-result" class="alert alert-success" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>CSV File Uploaded Successfully!</strong></div>');
+    //         $.ajax({
+    //             url: "./upload.php",
+    //             method: "POST",
+    //             success: function(response) {
+    //                 console.log(response);
+    //                 // if(response == 1) {
+    //                 //     console.log("File Uploaded Successfully!");
+    //                 //     $('#result').append('<div id="alert-result" class="alert alert-success" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>CSV File Uploaded Successfully!</strong></div>');
     
-                    //     setTimeout(function() {
-                    //         $('#alert-result').remove();
-                    //     }, 5000);
+    //                 //     setTimeout(function() {
+    //                 //         $('#alert-result').remove();
+    //                 //     }, 5000);
     
                     
-                    //     //$('#asset_table').DataTable().ajax.reload();
-                    // } else {
-                    //     console.log("File upload failed!");
-                    //     $('#result').append('<div id="alert-result" class="alert alert-danger" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failed to upload file!</strong></div>');
+    //                 //     //$('#asset_table').DataTable().ajax.reload();
+    //                 // } else {
+    //                 //     console.log("File upload failed!");
+    //                 //     $('#result').append('<div id="alert-result" class="alert alert-danger" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failed to upload file!</strong></div>');
                     
-                    //     setTimeout(function() {
-                    //         $('#alert-result').remove();
-                    //     }, 5000);
-                    // }
-                }
-            });
-        }
+    //                 //d     setTimeout(function() {
+    //                 //         $('#alert-result').remove();
+    //                 //     }, 5000);
+    //                 // }
+    //             }
+    //         });
+    //     }
 
-        // hide modal after submit
-        $('#fileUpload').modal('hide')
-    });
+    //     // hide modal after submit
+    //     $('#fileUpload').modal('hide')
+    // });
 
     $('#deleteRecord').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
