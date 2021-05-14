@@ -103,12 +103,12 @@
         </nav>
 
         <!-- Content Area -->
-        <div class="container-fluid flex-grow-1 bg-light h-100" id="window">
+        <div class="container-fluid flex-grow-1 bg-light" id="window">
             <div id="result" class="alert-fixed"></div>
 
             <!-- Data Table -->
-            <div class="row h-100">
-                <div class="container-fluid">
+            <div class="row">
+                <div class="container-fluid table-responsive text-nowrap">
                     <!-- DB Record options -->
                     <div id="toolbar">
                         <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
@@ -116,7 +116,6 @@
                     </div> 
                     <table id="table" class="table"
                         data-toggle="table"
-                        data-height="680"
                         data-toolbar="#toolbar"
                         data-search="true"
                         data-show-multi-sort="true"
