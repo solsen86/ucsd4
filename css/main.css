@@ -1,13 +1,12 @@
 html, 
 body {
     height: 100%;
+    width: 100%;
     margin: 0;
-    overflow: hidden;
 }
 
 #window {
-    margin-top: 60px;
-    bottom: 0;
+    padding-top: 60px;
 }
 
 .wrapper {
@@ -39,10 +38,4 @@ body {
     width: 450px;
     z-index:9999; 
     border-radius:15px;
-}
-
-table {
-    table-layout: auto;
-    width: 100%;
-    overflow:auto;
 }

@@ -17,7 +17,7 @@ if(isset($_POST["submit"])) {
                          SET building_id = (SELECT buildings.building_id FROM buildings WHERE buildings.building_code = @column1), room_number = @column2;';
         
         if($res = mysqli_query($link, $insert_rooms)) {
-            echo $res . '<br>';
+            echo $res . '- rooms<br>';
         } else { 
             die (mysqli_error($link));
         }
@@ -49,7 +49,7 @@ if(isset($_POST["submit"])) {
                         SET brand_id = (SELECT brand_id FROM brands WHERE brand_name = @column8), model_name = @column9;';
 
         if($res = mysqli_query($link, $insert_models)) {
-            echo $res . '<br>';
+            echo $res . '- models<br>';
         } else { 
             die (mysqli_error($link));
         }
@@ -73,7 +73,7 @@ if(isset($_POST["submit"])) {
                         asset_cpu = @column12, asset_hdd_type = @column13, asset_hdd_size = @column14, 
                         asset_mem = @column15, asset_static_ip = @column16, asset_wlan_mac = @column17, 
                         asset_lan_mac = @column18, asset_sped_tag = NULLIF(@column24, ""), asset_bios_password = NULL, 
-                        asset_date = @column19, asset_price = @column23;';
+                        asset_date = (STR_TO_DATE(@column19,\'%m/%d/%Y\')), asset_price = @column23;';
 
         if($res = mysqli_query($link, $insert_assets)) {
             echo $res . ' - assets<br>';

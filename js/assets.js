@@ -17,7 +17,7 @@ $(window).on('load change', function () {
 
     //         $.ajax({
     //             url: "./upload.php",
-    //             method: "POST",
+    //             method: "POST",e
     //             success: function(response) {
     //                 console.log(response);
     //                 // if(response == 1) {
@@ -60,6 +60,8 @@ $(window).on('load change', function () {
     });
 
     $('#deleteForm').on('submit', function(e) {
+        e.preventDefault();
+        
         var asset_tag = $(this).serialize();
         console.log(asset_tag);
 
@@ -100,7 +102,6 @@ $(window).on('load change', function () {
                 }
             }
         });
-        e.preventDefault();
     });
 });
 

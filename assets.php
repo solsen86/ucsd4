@@ -45,8 +45,7 @@
             
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
             
-                <ul class="navbar-nav">
-                    <!-- Navebar items to show when sidebar is collapsed -->
+                <!-- <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="./assets.php">
                             <i class="fas fa-laptop fa-fw mx-2"></i>
@@ -64,8 +63,8 @@
                             <i class="fas fa-chart-bar fa-fw mx-2"></i>
                             Reports
                         </a>
-                    </li>
-                </ul>
+                    </li>w
+                </ul> -->
             
                 <!-- User profile dropdown -->
                 <ul class="navbar-nav ml-auto">
@@ -103,12 +102,12 @@
         </nav>
 
         <!-- Content Area -->
-        <div class="container-fluid flex-grow-1 bg-light" id="window">
+        <div class="container-fluid flex-grow-1 bg-light h-100" id="window">
             <div id="result" class="alert-fixed"></div>
 
             <!-- Data Table -->
-            <div class="row">
-                <div class="container-fluid table-responsive text-nowrap">
+            <div class="row h-100">
+                <div class="container-fluid table-responsive text-nowrap h-100">
                     <!-- DB Record options -->
                     <div id="toolbar">
                         <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
@@ -116,6 +115,7 @@
                     </div> 
                     <table id="table" class="table"
                         data-toggle="table"
+                        data-height="875"
                         data-toolbar="#toolbar"
                         data-search="true"
                         data-show-multi-sort="true"
