@@ -113,19 +113,7 @@
                         <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
                         <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
                     </div> 
-                    <table id="table" class="table"
-                        data-toggle="table"
-                        data-height="875"
-                        data-toolbar="#toolbar"
-                        data-search="true"
-                        data-show-multi-sort="true"
-                        data-filter-control="true"
-                        data-show-fullscreen="true"
-                        data-show-columns="true"
-                        data-show-columns-toggle-all="true"
-                        data-minimum-count-columns="2"
-                        data-id-field="tag"
-                        data-url="get_data.php">
+                    <table id="table" class="table">
                         <thead>
                             <tr>
                                 <th data-field="id" data-sortable="true" data-switchable="false">ID</th>
@@ -154,6 +142,7 @@
                                 <th data-field="actions" data-sortable="false" data-switchable="false">Action</th>
                             </tr>
                         </thead>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>

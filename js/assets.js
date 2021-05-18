@@ -1,107 +1,80 @@
-$(window).on('load change', function () {
-    bsCustomFileInput.init();
+$(window).ready(function () {
 
-    // $('#filepath').on('change',function(){
-    //     //get the file name
-    //     var filepath = $(this).val();
-    //     console.log(filepath);
-    //     var fileName = filepath.split("\\").pop();
-    //     //replace the "Choose a file" label
-    //     $('#filename').addClass("selected").html(fileName);
-    // });
+    var page = 1;
+    var current_page = 1;
+    var total_page = 0;
+    var is_ajax_fire = 0;
 
-    // $('#uploadCsv').on('submit', function(event) {
-    //     event.preventDefault();
-    //     //check if file is selected or not
-    //     if(file.length > 0) {
+    manageData();
 
-    //         $.ajax({
-    //             url: "./upload.php",
-    //             method: "POST",e
-    //             success: function(response) {
-    //                 console.log(response);
-    //                 // if(response == 1) {
-    //                 //     console.log("File Uploaded Successfully!");
-    //                 //     $('#result').append('<div id="alert-result" class="alert alert-success" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>CSV File Uploaded Successfully!</strong></div>');
-    
-    //                 //     setTimeout(function() {
-    //                 //         $('#alert-result').remove();
-    //                 //     }, 5000);
-    
-                    
-    //                 //     //$('#asset_table').DataTable().ajax.reload();
-    //                 // } else {
-    //                 //     console.log("File upload failed!");
-    //                 //     $('#result').append('<div id="alert-result" class="alert alert-danger" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failed to upload file!</strong></div>');
-                    
-    //                 //d     setTimeout(function() {
-    //                 //         $('#alert-result').remove();
-    //                 //     }, 5000);
-    //                 // }
-    //             }
-    //         });
-    //     }
-
-    //     // hide modal after submit
-    //     $('#fileUpload').modal('hide')
-    // });
-
-    $('#deleteRecord').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var deviceId = button.data('id');
-        //var link = "location.href='delete.php?id=" + deviceId + "'";
-        //console.log(link);
-    
-        var modal = $(this);
-        modal.find('.modal-title').text('Device ' + deviceId);
-        modal.find('.modal-body p').text('Are you sure you want to delete device ' + deviceId + '?');
-        modal.find('#asset_tag').val(deviceId);
-        //modal.find('#delete').attr("onclick", link);
-    });
-
-    $('#deleteForm').on('submit', function(e) {
-        e.preventDefault();
-        
-        var asset_tag = $(this).serialize();
-        console.log(asset_tag);
-
-        var elem = document.getElementById(asset_tag.split('=')[1]);
-        var row = $(elem).closest('tr');
-
-        // hide modal after submit
-        $('#deleteRecord').modal('hide')
-
+    /* manage data list */
+    function manageData() {
         $.ajax({
-            type: "POST",
-            url: "./delete.php",
-            data: asset_tag,
-            success: function(response) {
-                if(response == 1) {
-                    console.log("Successfully Deleted!");
-                    // remove row
-                    $(row).css('background', 'tomato');
-                    $(row).fadeOut(800, function() {
-                        $(this).remove();
-                    });
+            dataType: 'json',
+            url: url+'api/getData.php',
+            data: {page:page}
+        }).done(function(data){
+            total_page = Math.ceil(data.total/10);
+            current_page = page;
 
-                    $('#result').append('<div id="alert-result" class="alert alert-success" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Record removed successfully!</strong></div>');
+            $("#pagination").twbsPagination({
 
-                    setTimeout(function() {
-                        $('#alert-result').remove();
-                    }, 5000);
+            });
 
-                    
-                    //$('#asset_table').DataTable().ajax.reload();
-                } else {
-                    console.log("Failed to be deleted");
-                    $('#result').append('<div id="alert-result" class="alert alert-danger" role="alert"><a class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failed to remove record!</strong></div>');
-                    
-                    setTimeout(function() {
-                        $('#alert-result').remove();
-                    }, 5000);
-                }
-            }
+            manageRow(data.data);
+            is_ajax_fire = 1;
         });
-    });
+    }
+
+    /* Get Page Data */
+    function getPageData() {
+        $.ajax({
+            dataType: 'json',
+            url: url+'api/getData.php',
+            data: {page:page}
+        }).done(function(data) {
+            manageRow(data.data);
+        });
+    }
+
+    /* Add new Item table row */
+    function manageRow(data) {
+        var rows='';
+        $.each(data, function(key, value) {
+            rows += '<tr>';
+            rows += '<td>' + value.id + '</td>'; 
+            rows += '<td>' + value.bldg + '</td>'; 
+            rows += '<td>' + value.room + '</td>'; 
+            rows += '<td>' + value.loc + '</td>'; 
+            rows += '<td>' + value.name + '</td>'; 
+            rows += '<td>' + value.brand + '</td>'; 
+            rows += '<td>' + value.model + '</td>'; 
+            rows += '<td>' + value.type + '</td>'; 
+            rows += '<td>' + value.sn + '</td>'; 
+            rows += '<td>' + value.os + '</td>'; 
+            rows += '<td>' + value.cpu + '</td>'; 
+            rows += '<td>' + value.s_type + '</td>'; 
+            rows += '<td>' + value.s_size + '</td>'; 
+            rows += '<td>' + value.mem + '</td>'; 
+            rows += '<td>' + value.ip + '</td>'; 
+            rows += '<td>' + value.wlan + '</td>';
+            rows += '<td>' + value.lan + '</td>';   
+            rows += '<td>' + value.bios + '</td>'; 
+            rows += '<td>' + value.sped + '</td>'; 
+            rows += '<td>' + value.age + '</td>'; 
+            rows += '<td>' + value.date + '</td>'; 
+            rows += '<td>' + value.price + '</td>'; 
+            rows += '<td>' + value.status + '</td>';
+            rows += '<td data-id="' + value.id + '">';
+            rows += '<button data-toggle="modal" data-target="#edit-item" class="btn btn-primary edit-item"><i class=""></i></button';
+            rows += '<button data-toggle="modal" data-target="#check-out" class="btn btn-primary check-out"><i class=""></i></button';
+            rows += '<button class="btn btn-danger remove-item mr-2"><i class="fas fa-trash-alt"></i></button>'
+            rows += '</td>';
+            rows += '</tr>'; 
+        });
+
+        // add rows to <tbody>
+        $("tbody").html(rows);
+    }
 });
 

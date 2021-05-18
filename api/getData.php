@@ -1,5 +1,5 @@
 <?php
-include_once 'config.php';
+include_once '../config/config.php';
 
 $rows = array();
 $total = 0;
@@ -80,7 +80,7 @@ if($result = mysqli_query($link, $sql)){
                 "age" => $asset_age,
                 "price" => $price,
                 "status" => $status_name,
-                "actions" => '<a href="details.php?id=' . $asset_tag . '" class="mr-3 title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a> <a data-target="#deleteRecord" data-toggle="modal" id="'. $asset_tag . '" data-id="' . $asset_tag . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>'
+                "actions" => '<a href="details.php?id=' . $asset_tag . '" class="mr-3" title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a> <a data-target="#deleteRecord" data-toggle="modal" id="'. $asset_tag . '" data-id="' . $asset_tag . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>'
             );
 
             $total++;
