@@ -102,50 +102,46 @@
         </nav>
 
         <!-- Content Area -->
-        <div class="container-fluid flex-grow bg-light h-100" id="window">
+        <div class="container-fluid bg-light" id="window">
             <div id="result" class="alert-fixed"></div>
             <!-- DB Record options -->
-            <div id="toolbar" class="row my-2 mx-1">
+            <div id="toolbar" class="row my-3 mx-1">
                 <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
                 <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
             </div> 
-            <div id="filters" class="row">
-            </div>
             <!-- Data Table -->
-            <div class="row table-container">
-                <div class="container-fluid text-nowrap h-100">
-                    <table id="table" class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Building</th>
-                                <th>Room</th>
-                                <th>Location</th>
-                                <th>Name</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>Type</th>
-                                <th>SN</th>
-                                <th>OS</th>
-                                <th>CPU</th>
-                                <th>Storage Type</th>
-                                <th>Storage Size</th>
-                                <th>RAM</th>
-                                <th>IP Address</th>
-                                <th>WLAN MAC Addr.</th>
-                                <th>LAN MAC Addr.</th>
-                                <th>BIOS Pwd.</th>
-                                <th>SPED</th>
-                                <th>Age</th>
-                                <th>Purchase Date</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+            <div class="text-nowrap table-container">
+                <table id="table" class="table table-striped table-hover table-responsive-sm">
+                    <thead>
+                        <tr>
+                            <th data-field="id">ID</th>
+                            <th data-field="bldg">Building</th>
+                            <th data-field="room">Room</th>
+                            <th data-field="loc">Location</th>
+                            <th data-field="name">Name</th>
+                            <th data-field="brand">Brand</th>
+                            <th data-field="model">Model</th>
+                            <th data-field="type">Type</th>
+                            <th data-field="sn">SN</th>
+                            <th data-field="os">OS</th>
+                            <th data-field="cpu">CPU</th>
+                            <th data-field="s_type">Storage Type</th>
+                            <th data-field="s_size">Storage Size</th>
+                            <th data-field="mem">RAM</th>
+                            <th data-field="ip">IP Address</th>
+                            <th data-field="wlan">WLAN MAC</th>
+                            <th data-field="lan">LAN MAC</th>
+                            <th data-field="bios">BIOS Pwd.</th>
+                            <th data-field="sped">SPED</th>
+                            <th data-field="age">Age</th>
+                            <th data-field="date">Purchase Date</th>
+                            <th data-field="price">Price</th>
+                            <th data-field="status">Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
 

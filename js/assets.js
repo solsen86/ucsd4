@@ -19,16 +19,16 @@ $(window).ready(function () {
         });
     }
 
-    /* Get Page Data */
-    function getPageData() {
-        $.ajax({
-            dataType: 'json',
-            url: './api/getData.php',
-            data: {page:page}
-        }).done(function(data) {
-            manageRow(data.data);
-        });
-    }
+    // /* Get Page Data */
+    // function getPageData() {
+    //     $.ajax({
+    //         dataType: 'json',
+    //         url: './api/getData.php',
+    //         data: {page:page}
+    //     }).done(function(data) {
+    //         manageRow(data.data);
+    //     });
+    // }
 
     /* Add new Item table row */
     function manageRow(data) {
@@ -69,5 +69,24 @@ $(window).ready(function () {
         // add rows to <tbody>
         $("tbody").html(rows);
     }
+
+    /* Create New Record */
+
+
+    /* Remove Record */
+    $("body").on("click", ".remove-item", function() {
+        var id = $(this).parent("td").data('id');
+        var c_obj = $(this).parent("tr");
+
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: './api/delete.php',
+            data: {id:id}
+        }).done(function(data){
+            c_obj.remove();
+            manageData();
+        });
+    });
 });
 

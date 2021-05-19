@@ -1,7 +1,7 @@
 <?php 
-require_once "./config.php";
+include_once "../config/config.php";
 
-$asset_tag = mysqli_real_escape_string($link, $_POST['asset_tag']);
+$asset_tag = mysqli_real_escape_string($link, $_POST['id']);
 
 // Check record exists
 $checkRecord = mysqli_query($link,"SELECT * FROM assets WHERE asset_tag=".$asset_tag);
