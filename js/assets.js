@@ -11,15 +11,8 @@ $(window).ready(function () {
     function manageData() {
         $.ajax({
             dataType: 'json',
-            url: url+'api/getData.php',
-            data: {page:page}
+            url: './api/getData.php',
         }).done(function(data){
-            total_page = Math.ceil(data.total/10);
-            current_page = page;
-
-            $("#pagination").twbsPagination({
-
-            });
 
             manageRow(data.data);
             is_ajax_fire = 1;
@@ -30,7 +23,7 @@ $(window).ready(function () {
     function getPageData() {
         $.ajax({
             dataType: 'json',
-            url: url+'api/getData.php',
+            url: './api/getData.php',
             data: {page:page}
         }).done(function(data) {
             manageRow(data.data);
@@ -66,8 +59,8 @@ $(window).ready(function () {
             rows += '<td>' + value.price + '</td>'; 
             rows += '<td>' + value.status + '</td>';
             rows += '<td data-id="' + value.id + '">';
-            rows += '<button data-toggle="modal" data-target="#edit-item" class="btn btn-primary edit-item"><i class=""></i></button';
-            rows += '<button data-toggle="modal" data-target="#check-out" class="btn btn-primary check-out"><i class=""></i></button';
+            rows += '<button data-toggle="modal" data-target="#edit-item" class="btn btn-primary edit-item mr-2"><i class="fas fa-pen"></i></button>';
+            rows += '<button data-toggle="modal" data-target="#check-out" class="btn btn-primary check-out mr-2"><i class="fas fa-user-check"></i></button>';
             rows += '<button class="btn btn-danger remove-item mr-2"><i class="fas fa-trash-alt"></i></button>'
             rows += '</td>';
             rows += '</tr>'; 

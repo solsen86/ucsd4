@@ -80,7 +80,6 @@ if($result = mysqli_query($link, $sql)){
                 "age" => $asset_age,
                 "price" => $price,
                 "status" => $status_name,
-                "actions" => '<a href="details.php?id=' . $asset_tag . '" class="mr-3" title="View" data-toggle="tooltip"><span class="fas fa-external-link-alt mr-2"></span></a> <a data-target="#deleteRecord" data-toggle="modal" id="'. $asset_tag . '" data-id="' . $asset_tag . '" class="mr-3 title="Delete" data-toggle="tooltip"><span class="fas fa-trash-alt mr-2"></span></a>'
             );
 
             $total++;
@@ -113,8 +112,7 @@ if($result = mysqli_query($link, $sql)){
         "date" => '',
         "age" => '',
         "price" => '',
-        "status" => '',
-        "actions" => ''
+        "status" => ''
     );
 }
 
@@ -123,10 +121,9 @@ mysqli_close($link);
 
 $json_array = array(
     "total" => $total,
-    "totalNotFilterd" => $total,
-    "rows" => $rows
+    "data" => $rows
 );
 
 // return JSON string
-        echo json_encode($json_array);
+echo json_encode($json_array);
 ?>

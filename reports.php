@@ -9,7 +9,7 @@
     }
 
     // Include config file
-    require_once "./config.php";
+    require_once "./config/config.php";
 
     //pull overall data to feed dashboard widgets
 
