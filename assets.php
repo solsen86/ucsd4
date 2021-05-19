@@ -102,44 +102,45 @@
         </nav>
 
         <!-- Content Area -->
-        <div class="container-fluid flex-grow-1 bg-light h-100" id="window">
+        <div class="container-fluid flex-grow bg-light h-100" id="window">
             <div id="result" class="alert-fixed"></div>
-
+            <!-- DB Record options -->
+            <div id="toolbar" class="row my-2 mx-1">
+                <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
+                <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
+            </div> 
+            <div id="filters" class="row">
+            </div>
             <!-- Data Table -->
-            <div class="row h-100">
-                <div class="container-fluid table-responsive text-nowrap h-100">
-                    <!-- DB Record options -->
-                    <div id="toolbar">
-                        <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
-                        <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
-                    </div> 
+            <div class="row table-container">
+                <div class="container-fluid text-nowrap h-100">
                     <table id="table" class="table">
                         <thead>
                             <tr>
-                                <th data-field="id" data-sortable="true" data-switchable="false">ID</th>
-                                <th data-field="building" data-sortable="true" data-switchable="false" data-filter-control="select">Building</th>
-                                <th data-field="room" data-sortable="true">Room</th>
-                                <th data-field="location" data-sortable="true">Location</th>
-                                <th data-field="name" data-sortable="true">Name</th>
-                                <th data-field="brand" data-sortable="true" data-switchable="false" data-filter-control="select">Brand</th>
-                                <th data-field="model" data-sortable="true" data-switchable="false" data-filter-control="select">Model</th>
-                                <th data-field="type" data-sortable="true" data-filter-control="select">Type</th>
-                                <th data-field="serial" data-sortable="true">SN</th>
-                                <th data-field="os" data-sortable="true" data-filter-control="select" data-visible="false">OS</th>
-                                <th data-field="cpu" data-sortable="true" data-filter-control="select" data-visible="false">CPU</th>
-                                <th data-field="hdd_type" data-sortable="true" data-visible="false">Storage Type</th>
-                                <th data-field="hdd_size" data-sortable="true" data-visible="false">Storage Size</th>
-                                <th data-field="mem" data-sortable="true" data-visible="false">RAM</th>
-                                <th data-field="ip" data-sortable="true" data-visible="false">IP Address</th>
-                                <th data-field="wlan" data-sortable="true" data-visible="false">WLAN MAC Addr.</th>
-                                <th data-field="lan" data-sortable="true"  data-visible="false">LAN MAC Addr.</th>
-                                <th data-field="bios" data-sortable="true"  data-visible="false">BIOS Pwd.</th>
-                                <th data-field="sped" data-sortable="true" data-filter-control="select">SPED</th>
-                                <th data-field="age" data-sortable="true">Age</th>
-                                <th data-field="date" data-sortable="true">Purchase Date</th>
-                                <th data-field="price" data-sortable="true" data-filter-control="select">Price</th>
-                                <th data-field="status" data-sortable="true">Status</th>
-                                <th data-field="actions" data-sortable="false" data-switchable="false">Action</th>
+                                <th>ID</th>
+                                <th>Building</th>
+                                <th>Room</th>
+                                <th>Location</th>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Type</th>
+                                <th>SN</th>
+                                <th>OS</th>
+                                <th>CPU</th>
+                                <th>Storage Type</th>
+                                <th>Storage Size</th>
+                                <th>RAM</th>
+                                <th>IP Address</th>
+                                <th>WLAN MAC Addr.</th>
+                                <th>LAN MAC Addr.</th>
+                                <th>BIOS Pwd.</th>
+                                <th>SPED</th>
+                                <th>Age</th>
+                                <th>Purchase Date</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
