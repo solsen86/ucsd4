@@ -20,16 +20,9 @@
 
         <!-- Bootstrap & CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/1.2.1/css/searchPanes.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css"> -->
-        <!-- <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.5.3/css/colReorder.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"></link> -->
-        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
         <link rel="stylesheet" href="./css/main.css">
-        
     </head>
     <body>
         
@@ -105,9 +98,11 @@
         <div class="container-fluid bg-light" id="window">
             <div id="result" class="alert-fixed"></div>
             <!-- DB Record options -->
-            <div id="toolbar" class="row my-3 mx-1">
-                <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
-                <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
+            <div id="toolbar" class="row my-3">
+                <div class="btn-group col-3" role="toolbar">
+                    <button class="btn btn-outline-secondary mr-2" data-bs-toggle="modal" data-bs-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
+                    <button class="btn btn-outline-secondary mr-2" data-bs-toggle="modal" data-bs-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
+                </div>
             </div> 
             <!-- Data Table -->
             <div class="text-nowrap table-container">
@@ -153,9 +148,7 @@
                         <h5 class="modal-title">
                             Upload from CSV
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="uploadCsv" name="uploadCsv" action="upload.php" method="post" enctype="multipart/form-data">
@@ -166,7 +159,7 @@
                             </div>
                             <div>
                                 <button class="btn btn-success my-2 ml-2 float-right" type="submit" name="submit"><i class="fas fa-file-import mr-2"></i>Upload File</button>
-                                <button class="btn btn-outline-secondary my-2 float-right" type="button" data-dismiss="modal">Cancel</button>
+                                <button class="btn btn-outline-secondary my-2 float-right" type="button" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -176,46 +169,170 @@
         
         <!-- New Record Modal -->
         <div class="modal fade" tabindex="-1" id="addNew" role="dialog">
-            <div class="modal-dialog" role="document" >
+            <div class="modal-dialog modal-lg" role="document" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">
                             Add New Record
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>            
-            </div>
-        </div>
-
-        <!-- Delete Record Modal -->
-        <div class="modal fade" tabindex="-1" id="deleteRecord" role="dialog">
-            <div class="modal-dialog" role="document" >
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            Deleting Record for Device
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete this record?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <form id="deleteForm">
-                            <input type="hidden" id="asset_tag" name="asset_tag" value="">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cancel</button>
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt mr-2"></i>Delete</button>
+                        <form role="form">
+                            <div class="form-row">
+                                <div class="form-group col-2">
+                                    <label class="control-label" for="id">District ID</label>
+                                    <input type="number" class="form-control" name="id" required />
+                                </div>
+                                <div class="form-group col-5">
+                                    <label class="control-label" for="name">Name</label>
+                                    <input type="text" class="form-control" name="name"/>
+                                </div>
+                                <div class="form-group col -3">
+                                    <label class="control-label" for="status">Device Status</label>
+                                    <select class="form-control" name="status" required>
+                                        <option value="">...</option>
+                                        <option value="In Service">In Service</option>
+                                        <option value="">Out of Service</option>
+                                        <option value="">Recycle List</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-2 text-center">
+                                    <input type="checkbox" id="spedCheck" class="form-check-input" name="sped" value="YES" />
+                                    <label class="form-check-label" for="sped">SPED</label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-2">
+                                    <label class="control-label" for="bldg">Building</label>
+                                    <select class="form-control" name="bldg" required>
+                                        <option>...</option>
+                                        <option value="HS">HS</option>
+                                        <option value="K8">K8</option>
+                                        <option value="DO">DO</option>
+                                        <option value="BB">BB</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-5">
+                                    <label class="control-label" for="room">Room</label>
+                                    <input type="text" class="form-control" name="room" required />
+                                </div>
+                                <div class="form-group col-5">
+                                    <label class="control-label" for="loc">Location (optional)</label>
+                                    <input type="text" class="form-control" name="loc" />
+                                </div>
+                            </div>
+                            <h6 class="text-secondary">Device Information</h6>
+                            <hr />
+                            <div class="form-row">
+                                <div class="form-group col 3">
+                                    <label class="control-label" for="type">Device Type</label>
+                                    <select class="form-control" name="type" required>
+                                        <option>...</option>
+                                        <option value="DESKTOP">Desktop</option>
+                                        <option value="LAPTOP">Laptop</option>
+                                        <option value="SERVER">Server</option>
+                                        <option value="MOBILE DEVICE">Mobile Device</option>
+                                        <option value="PRINTER">Printer</option>
+                                        <option value="SCANNER">Scanner</option>
+                                        <option value="DOC CAM">Doc Cam</option>
+                                        <option value="PROJECTOR">Projectpr</option>
+                                        <option value="INTERACTIVE BOARD">Interactive Board</option>
+                                        <option value="ROUTER">Router</option>
+                                        <option value="SWITCH">Switch</option>
+                                        <option value="WIRELESS AP">Wireless AP</option>
+                                        <option value="NAS">NAS</option>
+                                        <option value="DEVICE CART">Device Cart</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="control-label" for="brand">Brand</label>
+                                    <input type="text" class="form-control" name="brand" required/>
+                                </div> 
+                                <div class="form-group col-3">
+                                    <label class="control-label" for="model">Model</label>
+                                    <input type="text" class="form-control" name="model" required/>
+                                </div> 
+                                <div class="form-group col-3">
+                                    <label class="control-label" for="sn">Serial #</label>
+                                    <input type="text" class="form-control" name="sn" required/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <label class="control-label" for="bios">BIOS Password</label>
+                                    <input type="text" class="form-control" name="bios" required/>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label for="date" class="control-label">Purchase Date</label>
+                                    <input type="date" class="form-control" name="date" />
+                                </div>
+                                <div class="form-group col-2">
+                                    <label for="price" class="control-label">Price</label>    
+                                    <input type="number" class="form-control" id="price" name="price" placeholder="0.00" />
+                                </div>
+                            </div>
+                            <h6 class="text-secondary">Tech Specs</h6>
+                            <hr />
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <label class="control-label" for="os">OS</label>
+                                    <select class="form-control" name="os">
+                                        <option value="">...</option>
+                                        <option value="Windows">Windows</option>
+                                        <option value="MacOS">MacOS</option>
+                                        <option value="Linux">Linux</option>
+                                        <option value="Android">Android</option>
+                                        <option value="iOS">iOS/iPadOS</option>
+                                        <option value="ChromeOS">ChromeOS</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-3">
+                                    <label class="control-label" for="cpu">CPU</label>
+                                    <input class="form-control" type="text" name="cpu" placeholder="i7-8650U">
+                                </div>
+                                <div class="form-group col-2">
+                                    <label class="control-label" for="s_type">Storage Type</label>
+                                    <select class="form-control" name="s_type">
+                                        <option value="">...</option>
+                                        <option value="SSD">SSD</option>
+                                        <option value="SSHD">SSHD</option>
+                                        <option value="HDD">HDD</option>
+                                        <option value="eMMC">eMMC</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-2">
+                                    <label class="control-label" for="s_size">Storage Size</label>
+                                    <input class="form-control" type="text" name="s_size" placeholder="0 GB" />
+                                </div>
+                                <div class="form-group col-2">
+                                    <label class="control-label" for="mem">RAM</label>
+                                    <input class="form-control" type="text" name="mem" placeholder="0 GB" />
+                                </div>
+                            </div>
+                            <h6 class="text-secondary">Network Info</h6>
+                            <hr />
+                            <div class="form-row">
+                                <div class="form-group col-4">
+                                    <div class="control-label" for="wlan">Wireless MAC Address</div>
+                                    <input type="text" class="form-control" name="wlan"/>
+                                </div>
+                                <div class="form-group col-4">
+                                    <div class="control-label" for="lan">Ethernet MAC Address</div>
+                                    <input type="text" class="form-control" name="lan"/>
+                                </div>
+                                <div class="form-group col-4">
+                                    <div class="control-label" for="ip">Static IP Address</div>
+                                    <input type="text" class="form-control" name="ip"/>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-row">
+                                <div class="form-group col-12 text-right">
+                                    <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-lg btn-success add-record">Submit</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>            
@@ -255,20 +372,10 @@
       
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
-        <!-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> -->
-        <!-- <script src="https://cdn.datatables.net/plug-ins/1.10.24/features/pageResize/dataTables.pageResize.min.js"></script>
-        <script src="https://cdn.datatables.net/searchpanes/1.2.1/js/dataTables.searchPanes.min.js"></script>
-        <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script> -->
-        <!-- <script src="https://cdn.datatables.net/colreorder/1.5.3/js/dataTables.colReorder.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script> -->
-        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/multiple-sort/bootstrap-table-multiple-sort.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+	    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
         <script type="text/javascript" src="./js/assets.js"></script>
     </body>
