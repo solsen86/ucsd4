@@ -28,18 +28,18 @@
         
         <!-- Top Navbar  -->
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-            <a class="navbar-brand" href="./assets.php">
-                <img src="./img/logo.ico">    
-                Information Technology
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            
-                <!-- <ul class="navbar-nav">
-                    <li class="nav-item">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="./assets.php">
+                    <img src="./img/logo.ico">    
+                    Information Technology
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" 
+                    aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigations">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <ul class="navbar-nav">
+                <!--    <li class="nav-item">
                         <a class="nav-link active" href="./assets.php">
                             <i class="fas fa-laptop fa-fw mx-2"></i>
                             Assets
@@ -60,16 +60,15 @@
                 </ul> -->
             
                 <!-- User profile dropdown -->
-                <ul class="navbar-nav ml-auto">
-
+                    
                     <!-- Nav Item - User Information -->
-                    <li name="full_name" class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="full_name">
+                    <li class="nav-item dropdown right ms-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="full_name">
                             <i class="fas fa-user-circle fa-lg mr-2"></i>
                             <?php echo $_SESSION["full_name"] ?>
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
                             <!-- <a class="dropdown-item" href="#">
                             <i class="bi bi-file-earmark-person bi-sm bi-fw mr-2 text-gray-400"></i>
@@ -84,11 +83,13 @@
                                 Activity Log
                                 <div class="dropdown-divider"></div>
                             </a> -->
-                            <a class="dropdown-item" href="./logout.php">
-                                <i class="fas fa-sign-out-alt fa-fw mr-4"></i>
-                                Logout
-                            </a>
-                        </div>
+                            <li class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="./logout.php">
+                                    <i class="fas fa-sign-out-alt fa-fw mr-4"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -178,57 +179,56 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form role="form">
-                            <div class="form-row">
-                                <div class="form-group col-2">
-                                    <label class="control-label" for="id">District ID</label>
-                                    <input type="number" class="form-control" name="id" required />
+                        <form class="needs-validation add-new" id="addForm" novalidate>
+                            <div class="row mb-3">
+                                <div class="form-floating col-2">
+                                    <input type="number" class="form-control" name="id" placeholder="District ID" required />
+                                    <label  for="id">District ID</label>
                                 </div>
-                                <div class="form-group col-5">
-                                    <label class="control-label" for="name">Name</label>
-                                    <input type="text" class="form-control" name="name"/>
+                                <div class="form-floating col-5">
+                                    <input type="text" class="form-control" name="name" placeholder="Device Name"/>
+                                    <label  for="name">Device Name</label>
                                 </div>
-                                <div class="form-group col -3">
-                                    <label class="control-label" for="status">Device Status</label>
-                                    <select class="form-control" name="status" required>
-                                        <option value="">...</option>
+                                <div class="form-floating col -3">
+                                    <select class="form-select" name="status" required>
+                                        <option></option>
                                         <option value="In Service">In Service</option>
-                                        <option value="">Out of Service</option>
-                                        <option value="">Recycle List</option>
+                                        <option value="Out of Service">Out of Service</option>
+                                        <option value="Recycle List">Recycle List</option>
                                     </select>
+                                    <label  for="status">Device Status</label>
                                 </div>
-                                <div class="form-group col-2 text-center">
-                                    <input type="checkbox" id="spedCheck" class="form-check-input" name="sped" value="YES" />
+                                <div class="col-2 text-center">
+                                    <input type="checkbox" class="form-check-input" id="spedCheck" name="sped">
                                     <label class="form-check-label" for="sped">SPED</label>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-2">
-                                    <label class="control-label" for="bldg">Building</label>
-                                    <select class="form-control" name="bldg" required>
-                                        <option>...</option>
+                            <div class="row mb-3">
+                                <div class="form-floating col-2">
+                                    <select class="form-select" name="bldg" required>
+                                        <option></option>
                                         <option value="HS">HS</option>
                                         <option value="K8">K8</option>
                                         <option value="DO">DO</option>
                                         <option value="BB">BB</option>
                                     </select>
+                                    <label  for="bldg">Building</label>
                                 </div>
-                                <div class="form-group col-5">
-                                    <label class="control-label" for="room">Room</label>
-                                    <input type="text" class="form-control" name="room" required />
+                                <div class="form-floating col-5">
+                                    <input type="text" class="form-control" placeholder="Room" name="room" required />
+                                    <label  for="room">Room</label>
                                 </div>
-                                <div class="form-group col-5">
-                                    <label class="control-label" for="loc">Location (optional)</label>
-                                    <input type="text" class="form-control" name="loc" />
+                                <div class="form-floating col-5">
+                                    <input type="text" class="form-control" placeholder="Location (optional)" name="loc" />
+                                    <label  for="loc">Location (optional)</label>
                                 </div>
                             </div>
                             <h6 class="text-secondary">Device Information</h6>
                             <hr />
-                            <div class="form-row">
-                                <div class="form-group col 3">
-                                    <label class="control-label" for="type">Device Type</label>
-                                    <select class="form-control" name="type" required>
-                                        <option>...</option>
+                            <div class="row mb-3">
+                                <div class="form-floating col 3">
+                                    <select class="form-select" name="type" required>
+                                        <option></option>
                                         <option value="DESKTOP">Desktop</option>
                                         <option value="LAPTOP">Laptop</option>
                                         <option value="SERVER">Server</option>
@@ -244,41 +244,44 @@
                                         <option value="NAS">NAS</option>
                                         <option value="DEVICE CART">Device Cart</option>
                                     </select>
+                                    <label  for="type">Device Type</label>
                                 </div>
-                                <div class="form-group col-3">
-                                    <label class="control-label" for="brand">Brand</label>
-                                    <input type="text" class="form-control" name="brand" required/>
+                                <div class="form-floating col-3">
+                                    <input type="text" class="form-control" placeholder="Brand" name="brand" required/>
+                                    <label  for="brand">Brand</label>
                                 </div> 
-                                <div class="form-group col-3">
-                                    <label class="control-label" for="model">Model</label>
-                                    <input type="text" class="form-control" name="model" required/>
+                                <div class="form-floating col-3">
+                                    <input type="text" class="form-control" placeholder="Model" name="model" required/>
+                                    <label  for="model">Model</label>
                                 </div> 
-                                <div class="form-group col-3">
-                                    <label class="control-label" for="sn">Serial #</label>
-                                    <input type="text" class="form-control" name="sn" required/>
+                                <div class="form-floating col-3">
+                                    <input type="text" class="form-control" placeholder="Serial #" name="sn" required/>
+                                    <label  for="sn">Serial #</label>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-3">
-                                    <label class="control-label" for="bios">BIOS Password</label>
-                                    <input type="text" class="form-control" name="bios" required/>
+                            <div class="row mb-3">
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" name="bios" placeholder="BIOS Password"/>
+                                    <label  for="bios">BIOS Password</label>
                                 </div>
-                                <div class="form-group col-3">
-                                    <label for="date" class="control-label">Purchase Date</label>
-                                    <input type="date" class="form-control" name="date" />
+                                <div class="form-floating col-3">
+                                    <input type="date" class="form-control" placeholder="Purchase Date" name="date" />
+                                    <label for="date" >Purchase Date</label>
                                 </div>
-                                <div class="form-group col-2">
-                                    <label for="price" class="control-label">Price</label>    
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="0.00" />
+                                <div class="col-2">
+                                    <label for="price" >Price</label>    
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" id="price" name="price" placeholder="0.00" /> 
+                                    </div>
                                 </div>
                             </div>
                             <h6 class="text-secondary">Tech Specs</h6>
                             <hr />
-                            <div class="form-row">
-                                <div class="form-group col-3">
-                                    <label class="control-label" for="os">OS</label>
-                                    <select class="form-control" name="os">
-                                        <option value="">...</option>
+                            <div class="row mb-3">
+                                <div class="form-floating col-3">
+                                    <select class="form-select" name="os">
+                                        <option></option>
                                         <option value="Windows">Windows</option>
                                         <option value="MacOS">MacOS</option>
                                         <option value="Linux">Linux</option>
@@ -286,49 +289,50 @@
                                         <option value="iOS">iOS/iPadOS</option>
                                         <option value="ChromeOS">ChromeOS</option>
                                     </select>
+                                    <label  for="os">OS</label>
                                 </div>
-                                <div class="form-group col-3">
-                                    <label class="control-label" for="cpu">CPU</label>
+                                <div class="form-floating col-3">
                                     <input class="form-control" type="text" name="cpu" placeholder="i7-8650U">
+                                    <label  for="cpu">CPU</label>
                                 </div>
-                                <div class="form-group col-2">
-                                    <label class="control-label" for="s_type">Storage Type</label>
-                                    <select class="form-control" name="s_type">
-                                        <option value="">...</option>
+                                <div class="form-floating col-2">
+                                    <select class="form-select" name="s_type">
+                                        <option></option>
                                         <option value="SSD">SSD</option>
                                         <option value="SSHD">SSHD</option>
                                         <option value="HDD">HDD</option>
                                         <option value="eMMC">eMMC</option>
                                     </select>
+                                    <label  for="s_type">Storage Type</label>
                                 </div>
-                                <div class="form-group col-2">
-                                    <label class="control-label" for="s_size">Storage Size</label>
+                                <div class="form-floating col-2">
                                     <input class="form-control" type="text" name="s_size" placeholder="0 GB" />
+                                    <label  for="s_size">Storage Size</label>
                                 </div>
-                                <div class="form-group col-2">
-                                    <label class="control-label" for="mem">RAM</label>
+                                <div class="form-floating col-2">
                                     <input class="form-control" type="text" name="mem" placeholder="0 GB" />
+                                    <label  for="mem">RAM</label>
                                 </div>
                             </div>
                             <h6 class="text-secondary">Network Info</h6>
                             <hr />
-                            <div class="form-row">
-                                <div class="form-group col-4">
-                                    <div class="control-label" for="wlan">Wireless MAC Address</div>
-                                    <input type="text" class="form-control" name="wlan"/>
+                            <div class="row mb-3">
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" placeholder="Wireless MAC Address" name="wlan"/>
+                                    <label  for="wlan">Wireless MAC Address</label>
                                 </div>
-                                <div class="form-group col-4">
-                                    <div class="control-label" for="lan">Ethernet MAC Address</div>
-                                    <input type="text" class="form-control" name="lan"/>
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" placeholder="Ethernet MAC Address" name="lan"/>
+                                    <label  for="lan">Ethernet MAC Address</label>
                                 </div>
-                                <div class="form-group col-4">
-                                    <div class="control-label" for="ip">Static IP Address</div>
-                                    <input type="text" class="form-control" name="ip"/>
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" placeholder="Static IP Address" name="ip"/>
+                                    <label  for="ip">Static IP Address</label>
                                 </div>
                             </div>
                             <hr>
-                            <div class="form-row">
-                                <div class="form-group col-12 text-right">
+                            <div class="row text-end">
+                                <div class="col-12 text-end">
                                     <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-lg btn-success add-record">Submit</button>
                                 </div>
@@ -374,8 +378,8 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-	    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
         <script type="text/javascript" src="./js/assets.js"></script>
     </body>
