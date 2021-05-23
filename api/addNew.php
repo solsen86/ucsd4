@@ -78,7 +78,7 @@
     // echo $insert_assets;
     mysqli_query($link, $insert_assets); 
 
-    $new_asset = "SELECT * FROM assets ORDER BY asset_tag DESC LIMIT 1";
+    $new_asset = "SELECT * FROM assets WHERE asset_tag = " . $data['id'];
 
     $result = mysqli_query($link, $new_asset);
 

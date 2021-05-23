@@ -132,8 +132,8 @@ $(window).ready(function () {
             $("#addNew").find("select[name='status']").val("");
             
             $("#addForm")[0].classList.remove('was-validated');
-            // getData();
-            // $("#addNew").modal('hide');
+            getData();
+            $("#addNew").modal('hide');
 
         });
     });
