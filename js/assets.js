@@ -41,8 +41,8 @@ $(window).ready(function () {
             rows += '<td>' + value.status + '</td>';
             rows += '<td data-id="' + value.id + '">';
             rows += '<div class="btn-group" role="group">';
-            rows += '<button data-toggle="modal" data-target="#edit-item" class="btn btn-secondary edit-item mr-2"><i class="fas fa-pen"></i></button>';
-            rows += '<button data-toggle="modal" data-target="#check-out" class="btn btn-secondary check-out mr-2"><i class="fas fa-user-check"></i></button>';
+            rows += '<button data-bs-toggle="modal" data-bs-target="#editForm" class="btn btn-secondary edit-item mr-2"><i class="fas fa-pen"></i></button>';
+            rows += '<button data-bs-toggle="modal" data-bs-target="#checkOut" class="btn btn-secondary check-out mr-2"><i class="fas fa-user-check"></i></button>';
             rows += '<button class="btn btn-danger remove-item mr-2"><i class="fas fa-trash-alt"></i></button>';
             rows += '</div>';
             rows += '</td>';

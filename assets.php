@@ -343,6 +343,180 @@
             </div>
         </div>
 
+         <!-- Edit Record Modal -->
+         <div class="modal fade" tabindex="-1" id="editRecord" role="dialog">
+            <div class="modal-dialog modal-lg" role="document" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Edit Record
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="needs-validation add-new" id="editForm" novalidate>
+                            <div class="row mb-3">
+                                <div class="form-floating col-2">
+                                    <input type="number" class="form-control" name="id" placeholder="District ID" required />
+                                    <label  for="id">District ID</label>
+                                </div>
+                                <div class="form-floating col-5">
+                                    <input type="text" class="form-control" name="name" placeholder="Device Name"/>
+                                    <label  for="name">Device Name</label>
+                                </div>
+                                <div class="form-floating col -3">
+                                    <select class="form-select" name="status" required>
+                                        <option></option>
+                                        <option value="In Service">In Service</option>
+                                        <option value="Out of Service">Out of Service</option>
+                                        <option value="Recycle List">Recycle List</option>
+                                    </select>
+                                    <label  for="status">Device Status</label>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <input type="checkbox" class="form-check-input" id="spedCheck" name="sped">
+                                    <label class="form-check-label" for="sped">SPED</label>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="form-floating col-2">
+                                    <select class="form-select" name="bldg" required>
+                                        <option></option>
+                                        <option value="HS">HS</option>
+                                        <option value="K8">K8</option>
+                                        <option value="DO">DO</option>
+                                        <option value="BB">BB</option>
+                                    </select>
+                                    <label  for="bldg">Building</label>
+                                </div>
+                                <div class="form-floating col-5">
+                                    <input type="text" class="form-control" placeholder="Room" name="room" required />
+                                    <label  for="room">Room</label>
+                                </div>
+                                <div class="form-floating col-5">
+                                    <input type="text" class="form-control" placeholder="Location (optional)" name="loc" />
+                                    <label  for="loc">Location (optional)</label>
+                                </div>
+                            </div>
+                            <h6 class="text-secondary">Device Information</h6>
+                            <hr />
+                            <div class="row mb-3">
+                                <div class="form-floating col 3">
+                                    <select class="form-select" name="type" required>
+                                        <option></option>
+                                        <option value="DESKTOP">Desktop</option>
+                                        <option value="LAPTOP">Laptop</option>
+                                        <option value="SERVER">Server</option>
+                                        <option value="MOBILE DEVICE">Mobile Device</option>
+                                        <option value="PRINTER">Printer</option>
+                                        <option value="SCANNER">Scanner</option>
+                                        <option value="DOC CAM">Doc Cam</option>
+                                        <option value="PROJECTOR">Projectpr</option>
+                                        <option value="INTERACTIVE BOARD">Interactive Board</option>
+                                        <option value="ROUTER">Router</option>
+                                        <option value="SWITCH">Switch</option>
+                                        <option value="WIRELESS AP">Wireless AP</option>
+                                        <option value="NAS">NAS</option>
+                                        <option value="DEVICE CART">Device Cart</option>
+                                    </select>
+                                    <label  for="type">Device Type</label>
+                                </div>
+                                <div class="form-floating col-3">
+                                    <input type="text" class="form-control" placeholder="Brand" name="brand" required/>
+                                    <label  for="brand">Brand</label>
+                                </div> 
+                                <div class="form-floating col-3">
+                                    <input type="text" class="form-control" placeholder="Model" name="model" required/>
+                                    <label  for="model">Model</label>
+                                </div> 
+                                <div class="form-floating col-3">
+                                    <input type="text" class="form-control" placeholder="Serial #" name="sn" required/>
+                                    <label  for="sn">Serial #</label>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" name="bios" placeholder="BIOS Password"/>
+                                    <label  for="bios">BIOS Password</label>
+                                </div>
+                                <div class="form-floating col-3">
+                                    <input type="date" class="form-control" placeholder="Purchase Date" name="date" />
+                                    <label for="date" >Purchase Date</label>
+                                </div>
+                                <div class="col-2">
+                                    <label for="price" >Price</label>    
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" id="price" name="price" placeholder="0.00" /> 
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="text-secondary">Tech Specs</h6>
+                            <hr />
+                            <div class="row mb-3">
+                                <div class="form-floating col-3">
+                                    <select class="form-select" name="os">
+                                        <option></option>
+                                        <option value="Windows">Windows</option>
+                                        <option value="MacOS">MacOS</option>
+                                        <option value="Linux">Linux</option>
+                                        <option value="Android">Android</option>
+                                        <option value="iOS">iOS/iPadOS</option>
+                                        <option value="ChromeOS">ChromeOS</option>
+                                    </select>
+                                    <label  for="os">OS</label>
+                                </div>
+                                <div class="form-floating col-3">
+                                    <input class="form-control" type="text" name="cpu" placeholder="i7-8650U">
+                                    <label  for="cpu">CPU</label>
+                                </div>
+                                <div class="form-floating col-2">
+                                    <select class="form-select" name="s_type">
+                                        <option></option>
+                                        <option value="SSD">SSD</option>
+                                        <option value="SSHD">SSHD</option>
+                                        <option value="HDD">HDD</option>
+                                        <option value="eMMC">eMMC</option>
+                                    </select>
+                                    <label  for="s_type">Storage Type</label>
+                                </div>
+                                <div class="form-floating col-2">
+                                    <input class="form-control" type="text" name="s_size" placeholder="0 GB" />
+                                    <label  for="s_size">Storage Size</label>
+                                </div>
+                                <div class="form-floating col-2">
+                                    <input class="form-control" type="text" name="mem" placeholder="0 GB" />
+                                    <label  for="mem">RAM</label>
+                                </div>
+                            </div>
+                            <h6 class="text-secondary">Network Info</h6>
+                            <hr />
+                            <div class="row mb-3">
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" placeholder="Wireless MAC Address" name="wlan"/>
+                                    <label  for="wlan">Wireless MAC Address</label>
+                                </div>
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" placeholder="Ethernet MAC Address" name="lan"/>
+                                    <label  for="lan">Ethernet MAC Address</label>
+                                </div>
+                                <div class="form-floating col-4">
+                                    <input type="text" class="form-control" placeholder="Static IP Address" name="ip"/>
+                                    <label  for="ip">Static IP Address</label>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row text-end">
+                                <div class="col-12 text-end">
+                                    <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-lg btn-success edit-record">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>            
+            </div>
+        </div>
             <!-- sidebar - colapses on smaller screens -->
             <!-- <div class="sidebar d-lg-block d-none bg-secondary p-0">
                 <div class="sidebar-container btn-group-vertical btn-group-justified">
