@@ -82,7 +82,7 @@
 
     $result = mysqli_query($link, $new_asset);
 
-    $data = $result->fetch_assoc();
+    $resultData = $result->fetch_assoc();
 
-    echo json_encode($data);
+    echo json_encode($resultData);
 ?>

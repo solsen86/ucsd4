@@ -72,7 +72,7 @@ if(isset($_POST["submit"])) {
                         WHERE dev_type = @column7), os_id = (SELECT os_id FROM systems WHERE os_name = @column11), 
                         asset_cpu = @column12, asset_hdd_type = @column13, asset_hdd_size = @column14, 
                         asset_mem = @column15, asset_static_ip = @column16, asset_wlan_mac = @column17, 
-                        asset_lan_mac = @column18, asset_sped_tag = NULLIF(@column24, ""), asset_bios_password = NULL, 
+                        asset_lan_mac = @column18, asset_sped_tag = NULLIF(@column24, ""), asset_bios_password = "", 
                         asset_date = (STR_TO_DATE(@column19,\'%m/%d/%Y\')), asset_price = @column23;';
 
         if($res = mysqli_query($link, $insert_assets)) {

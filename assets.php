@@ -343,8 +343,8 @@
             </div>
         </div>
 
-         <!-- Edit Record Modal -->
-         <div class="modal fade" tabindex="-1" id="editRecord" role="dialog">
+        <!-- Edit Record Modal -->
+        <div class="modal fade" tabindex="-1" id="editRecord" role="dialog">
             <div class="modal-dialog modal-lg" role="document" >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -354,9 +354,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation add-new" id="editForm" novalidate>
+                        <form class="needs-validation edit-record" id="editForm" novalidate>
                             <div class="row mb-3">
                                 <div class="form-floating col-2">
+                                    <input type="hidden" name="hidden_id" />
                                     <input type="number" class="form-control" name="id" placeholder="District ID" required />
                                     <label  for="id">District ID</label>
                                 </div>
@@ -509,7 +510,7 @@
                             <div class="row text-end">
                                 <div class="col-12 text-end">
                                     <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-lg btn-success edit-record">Submit</button>
+                                    <button type="submit" class="btn btn-lg btn-success update-record">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -517,6 +518,7 @@
                 </div>            
             </div>
         </div>
+
             <!-- sidebar - colapses on smaller screens -->
             <!-- <div class="sidebar d-lg-block d-none bg-secondary p-0">
                 <div class="sidebar-container btn-group-vertical btn-group-justified">
