@@ -1,8 +1,8 @@
 <?php 
 
-require_once './config.php';
+require_once '../config/config.php';
 
-if(isset($_POST["submit"])) {
+if(isset($_FILES["file"])) {
     
     $file = str_replace('\\', '/', $_FILES['file']['tmp_name']);
 

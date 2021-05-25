@@ -55,6 +55,35 @@ $(window).ready(function () {
         $("tbody").html(rows);
     } 
 
+    // upload from file
+    $("body").on('click', ".upload-csv", function(e) {
+        e.preventDefault();
+
+        var fd = new FormData();
+        var file = $("#file")[0].files;
+
+        console.log(file[0]);
+
+        console.log(file.length)
+
+        if(file.length > 0) {
+            fd.append('file',file[0]);
+            console.log('length is not 0')
+        }
+
+
+        $.ajax({
+            url: "./api/upload.php",
+            type: "POST",
+            data: fd,
+            contentType: false,
+            processData: false,
+        }).done(function(data) {
+            getData();
+            $("#fileUpload").modal("hide");
+        });
+    });
+
     // validate and submit form data for new item
     $("body").on('click', '.add-record',function (e) {
         'use strict';
@@ -276,7 +305,7 @@ $(window).ready(function () {
             
             $("#editForm")[0].classList.remove('was-validated');
             getData();
-            $("#editForm").modal('hide');
+            $("#editRecord").modal('hide');
 
         });
     })

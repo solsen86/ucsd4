@@ -20,9 +20,10 @@ body {
 .table-container {
     display: block;
     width: 100%;
-    height: 80%;
+    height: calc(100% - 150px);
     overflow: auto;
     background-color: white;
+    border: 1px solid rgb(199, 198, 198);
 }
 
 .table-container thead th {
@@ -30,18 +31,17 @@ body {
     top: 0;
     background-color: white;
     z-index: 1;
-    border-top: none;
+    height: 3em;
 }
-
-th, td {
-    padding: 8px 16px;
+thead tr {
+    border-top: none;
 }
 
 th:last-child, td:last-child {
     position: sticky;
     right: 0;
     background-color: #eee;
-    border: none;
+    border: 3px;
 }
 
 .wrapper {

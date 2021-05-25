@@ -9,7 +9,7 @@
     if($data['date'] != "") {
         $date = "(STR_TO_DATE('" . $data['date'] . "',\'%m/%d/%Y\')";
     } else {
-        $date = "NULL";
+        $date = "";
     }
    
     $os = $room = $type = $model = $status = "";
@@ -17,31 +17,31 @@
     if($data['os'] != "") {
         $os = "(SELECT os_id FROM systems WHERE os_name = '". $data['os'] . "')";
     } else {
-        $os = "NULL";
+        $os = "";
     }
 
     if($data['room'] != "") {
         $room = "(SELECT room_id FROM rooms WHERE room_number = '". $data['room'] . "')";
     } else {
-        $room = "NULL";
+        $room = "";
     }
 
     if($data['type'] != "") {
         $type = "(SELECT dev_type_id FROM dev_types WHERE dev_type = '". $data['type'] . "')";
     } else {
-        $type = "NULL";
+        $type = "";
     }
 
     if($data['model'] != "") {
         $model = "(SELECT model_id FROM models WHERE model_name = '". $data['model'] . "')";
     } else {
-        $model = "NULL";
+        $model = "";
     }
 
     if($data['status'] != "") {
         $status = "(SELECT status_id FROM dev_status WHERE status_name = '". $data['status'] . "')";
     } else {
-        $status = "NULL";
+        $status = "";
     }
 
     $insert_rooms = 'INSERT IGNORE INTO rooms (building_id,room_number)

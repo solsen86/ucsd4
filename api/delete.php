@@ -8,14 +8,22 @@ $checkRecord = mysqli_query($link,"SELECT * FROM assets WHERE asset_tag=".$asset
 $totalrows = mysqli_num_rows($checkRecord);
 
 if($totalrows > 0){
-// Delete record
-$query = "DELETE FROM assets WHERE asset_tag=".$asset_tag;
-mysqli_query($link,$query);
-echo 1;
-exit;
+    // Delete record
+    $query = "DELETE FROM assets WHERE asset_tag=".$asset_tag;
+    mysqli_query($link,$query);
+    $toast[] = array(
+        "message" => "Successfuly deleted device " . $asset_tag . " from the database!",
+        "title" => "Success!"
+    );
+    echo json_encode($toast);;
+    exit;
 }else{
-echo 0;
-exit;
+    $toast[] = array(
+        "message" => "Failed to delete device " . $asset_tag . " from the database!",
+        "class" => "Error!"
+    );
+    echo json_encode($toast);
+    exit;
 }
 
 ?>
