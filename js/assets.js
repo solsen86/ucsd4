@@ -49,7 +49,7 @@ $(window).ready(function () {
             rows += '</tr>'; 
         });
 
-        console.log(rows);
+        // console.log(rows);
 
         // add rows to <tbody>
         $("tbody").html(rows);
@@ -173,7 +173,8 @@ $(window).ready(function () {
         var id = $(this).parents("td").data("id");
         var status = $(this).parents("td").prev("td").text();
         var price = $(this).parents("td").prev("td").prev("td").text();
-        var date = $(this).parents("td").prev("td").prev("td").prev("td").text();
+        var date =  $(this).parents("td").prev("td").prev("td").prev("td").text();
+        console.log(date);
         var sped = $(this).parents("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
         var bios = $(this).parents("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
         var lan = $(this).parents("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
@@ -221,7 +222,7 @@ $(window).ready(function () {
             $("#editForm").find("input[name='sped']").prop('checked', false); //unchecks sped checkbox
         }
         
-        $("#editForm").find("input[name='date']").val(date);
+        document.getElementById("purchaseDate").value = date;
         $("#editForm").find("input[name='price']").val(price);
         $("#editForm").find("select[name='status']").val(status);
     });

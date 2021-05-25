@@ -30,7 +30,7 @@
     $update .= 'asset_lan_mac = "' . $data['lan'] . '",';
     $update .= 'asset_sped_tag = "' . $data['sped'] . '",';
     $update .= 'asset_bios_password = "' . $data['bios'] . '",';
-    $update .= 'asset_date = (STR_TO_DATE("' . $data['date'] . '", "%m/%d/%Y")),';
+    $update .= 'asset_date = (STR_TO_DATE("' . $data['date'] . '", "%Y-%m-%d")),';
     $update .= 'asset_price ="' . $data['price'] . '" ';
     $update .= 'WHERE asset_tag = ' . $rowID . ';';
 

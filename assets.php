@@ -105,7 +105,7 @@
             </div>
             <!-- Data Table -->
             <div class="text-nowrap table-container">
-                <table id="table" class="table table-striped table-hover table-sm table-bordered">
+                <table id="table" class="table table-striped table-hover table-responsive-sm table-bordered">
                     <thead>
                         <tr>
                             <th data-field="id">ID</th>
@@ -152,7 +152,7 @@
                     <div class="modal-body">
                         <form id="uploadCsv" name="uploadCsv" enctype="multipart/form-data">
                             <div class="custom-file">
-                                <input type="file" accept=".csv" class="form-control-file" id="file" name="file" required>
+                                <input type="file" accept=".csv,.xlsx" class="form-control-file" id="file" name="file" required>
                                 <label class="custom-file-label" for="file">Choose File...</label>
                                 <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
                             </div>
@@ -439,7 +439,7 @@
                                     <label  for="bios">BIOS Password</label>
                                 </div>
                                 <div class="form-floating col-3">
-                                    <input type="date" class="form-control" placeholder="Purchase Date" name="date" />
+                                    <input type="date" class="form-control" placeholder="Purchase Date" id="purchaseDate"name="date" />
                                     <label for="date" >Purchase Date</label>
                                 </div>
                                 <div class="col-2">
