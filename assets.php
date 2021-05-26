@@ -151,10 +151,8 @@
                     </div>
                     <div class="modal-body">
                         <form id="uploadCsv" name="uploadCsv" enctype="multipart/form-data">
-                            <div class="custom-file">
-                                <input type="file" accept=".csv,.xlsx" class="form-control-file" id="file" name="file" required>
-                                <label class="custom-file-label" for="file">Choose File...</label>
-                                <div class="invalid-feedback">Invalid file or file type. Please try again.</div>
+                            <div class="custom-file mb-3">   
+                                <input type="file" accept=".csv" class="form-control" id="file" name="file" required>
                             </div>
                             <div>
                                 <button class="btn btn-success my-2 ml-2 float-right upload-csv" type="submit" id="uploadBtn" name="submit"><i class="fas fa-file-import mr-2"></i>Upload File</button>
