@@ -12,7 +12,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Inventory</title>
+        <title>Test Inventory</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,7 +32,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="./assets.php">
                     <img src="./img/logo.ico">    
-                    Information Technology
+                    Test Inventory Database
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" 
                     aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigations">
