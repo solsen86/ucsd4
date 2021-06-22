@@ -20,7 +20,11 @@
     $update .= 'model_id = (SELECT model_id FROM models WHERE model_name = "' . $data['model'] . '"),';
     $update .= 'status_id = (SELECT status_id FROM dev_status WHERE status_name = "' . $data['status'] . '"),';
     $update .= 'dev_type_id = (SELECT dev_type_id FROM dev_types WHERE dev_type = "' . $data['type'] . '"),';
-    $update .= 'os_id = (SELECT os_id FROM systems WHERE os_name = "' . $data['os'] . '"),';
+    if($data['os'] != null) {
+        $update .= 'os_id = (SELECT os_id FROM systems WHERE os_name = "' . $data['os'] . '"),';
+    } else {
+        $update .= 'os_id = NULL,';
+    }
     $update .= 'asset_cpu = "' . $data['cpu'] . '",';
     $update .= 'asset_hdd_type = "' . $data['s_type'] . '",';
     $update .= 'asset_hdd_size = "' . $data['s_size'] . '",';

@@ -35,6 +35,11 @@ if($result = mysqli_query($link, $sql)){
             $model_name = $row['model_name'];
             $asset_serial = $row['asset_serial'];
             $os_name = $row['os_name'];
+            if($os_name == null) {
+                $os = "";
+            } else {
+                $os = $os_name;
+            }
             $asset_cpu = $row['asset_cpu'];
             $asset_hdd_type = $row['asset_hdd_type'];
             $asset_hdd_size = $row['asset_hdd_size'];
@@ -66,7 +71,7 @@ if($result = mysqli_query($link, $sql)){
                 "brand" => $brand_name,
                 "model" => $model_name,
                 "sn" => $asset_serial,
-                "os" => $os_name,
+                "os" => $os,
                 "cpu" => $asset_cpu,
                 "s_type" => $asset_hdd_type,
                 "s_size" => $asset_hdd_size,

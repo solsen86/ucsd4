@@ -277,7 +277,7 @@
                             <div class="row mb-3">
                                 <div class="form-floating col-3">
                                     <select class="form-select" name="os">
-                                        <option></option>
+                                        <option value=""></option>
                                         <option value="Windows">Windows</option>
                                         <option value="MacOS">MacOS</option>
                                         <option value="Linux">Linux</option>
