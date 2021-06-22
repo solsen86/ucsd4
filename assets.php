@@ -12,7 +12,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Test Inventory</title>
+        <title>Inventory</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,7 +22,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
         <link rel="stylesheet" href="./css/main.css">
     </head>
     <body>
@@ -32,7 +31,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="./assets.php">
                     <img src="./img/logo.ico">    
-                    Test Inventory Database
+                    Information Technology
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" 
                     aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigations">
@@ -100,7 +99,7 @@
         <div class="container-fluid bg-light" id="window">
             <div id="result" class="alert-fixed"></div>
             <!-- DB Record options -->
-            <div class="container-fluid my-3 pt-3 px-0 toolbar">
+            <div class="container-fluid my-3 pt-3 px-0">
                 <button class="btn btn-outline-secondary mr-2" data-bs-toggle="modal" data-bs-target="#addNew"><i class="fas fa-plus mr-2"></i>Add Record</button>
                 <button class="btn btn-outline-secondary mr-2" data-bs-toggle="modal" data-bs-target="#fileUpload"><i class="fas fa-file-csv mr-2"></i>Upload from CSV</button>
             </div>
@@ -109,27 +108,27 @@
                 <table id="table" class="table table-striped table-hover table-responsive-sm table-bordered">
                     <thead>
                         <tr>
-                            <th data-field="id" data-sortable="true">ID</th>
-                            <th data-field="bldg" data-sortable="true">Building</th>
-                            <th data-field="room" data-sortable="true">Room</th>
-                            <th data-field="loc" data-sortable="true">Location</th>
-                            <th data-field="name" data-sortable="true">Name</th>
-                            <th data-field="brand" data-sortable="true">Brand</th>
-                            <th data-field="model" data-sortable="true">Model</th>
-                            <th data-field="type" data-sortable="true">Type</th>
+                            <th data-field="id">ID</th>
+                            <th data-field="bldg">Building</th>
+                            <th data-field="room">Room</th>
+                            <th data-field="loc">Location</th>
+                            <th data-field="name">Name</th>
+                            <th data-field="brand">Brand</th>
+                            <th data-field="model">Model</th>
+                            <th data-field="type">Type</th>
                             <th data-field="sn">SN</th>
-                            <th data-field="os" data-sortable="true">OS</th>
-                            <th data-field="cpu" data-sortable="true">CPU</th>
-                            <th data-field="s_type" data-sortable="true">Storage Type</th>
-                            <th data-field="s_size" data-sortable="true">Storage Size</th>
-                            <th data-field="mem" data-sortable="true">RAM</th>
-                            <th data-field="ip" data-sortable="true">IP Address</th>
-                            <th data-field="wlan" data-sortable="true">WLAN MAC</th>
-                            <th data-field="lan" data-sortable="true">LAN MAC</th>
-                            <th data-field="bios" data-sortable="true">BIOS Pwd.</th>
-                            <th data-field="sped" data-sortable="true">SPED</th>
-                            <th data-field="age" data-sortable="true">Age</th>
-                            <th data-field="date" data-sortable="true">Purchase Date</th>
+                            <th data-field="os">OS</th>
+                            <th data-field="cpu">CPU</th>
+                            <th data-field="s_type">Storage Type</th>
+                            <th data-field="s_size">Storage Size</th>
+                            <th data-field="mem">RAM</th>
+                            <th data-field="ip">IP Address</th>
+                            <th data-field="wlan">WLAN MAC</th>
+                            <th data-field="lan">LAN MAC</th>
+                            <th data-field="bios">BIOS Pwd.</th>
+                            <th data-field="sped">SPED</th>
+                            <th data-field="age">Age</th>
+                            <th data-field="date">Purchase Date</th>
                             <th data-field="price">Price</th>
                             <th data-field="status">Status</th>
                             <th>Actions</th>
@@ -278,7 +277,7 @@
                             <div class="row mb-3">
                                 <div class="form-floating col-3">
                                     <select class="form-select" name="os">
-                                        <option></option>
+                                        <option value=""></option>
                                         <option value="Windows">Windows</option>
                                         <option value="MacOS">MacOS</option>
                                         <option value="Linux">Linux</option>
@@ -553,7 +552,6 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
         <script type="text/javascript" src="./js/assets.js"></script>
     </body>

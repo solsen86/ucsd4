@@ -8,6 +8,7 @@ $(window).ready(function () {
             url: './api/getData.php',
         }).done(function(data){
             manageRow(data.data);
+            console.log(data.data);
         });
     }
 
@@ -49,7 +50,7 @@ $(window).ready(function () {
             rows += '</tr>'; 
         });
 
-        // console.log(rows);
+        //console.log(rows);
 
         // add rows to <tbody>
         $("tbody").html(rows);
@@ -195,6 +196,9 @@ $(window).ready(function () {
         var bldg = $(this).parents("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
         var hidden_id = $(this).parents("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
 
+        console.log(os);
+
+
         // filling data fields for the edit form with current information
         $("#editForm").find("input[name='id']").val(id);
         $("#editForm").find("select[name='bldg']").val(bldg);
@@ -205,7 +209,13 @@ $(window).ready(function () {
         $("#editForm").find("input[name='model']").val(model);
         $("#editForm").find("select[name='type']").val(type);
         $("#editForm").find("input[name='sn']").val(sn);
-        $("#editForm").find("select[name='os']").val(os);
+
+        if(os != "") {
+            $("#editForm").find("select[name='os']").val(os);
+        } else {
+            $("#editForm").find("select[name='os']").val("");
+        }
+
         $("#editForm").find("input[name='cpu']").val(cpu);
         $("#editForm").find("select[name='s_type']").val(s_type);
         $("#editForm").find("input[name='s_size']").val(s_size);
